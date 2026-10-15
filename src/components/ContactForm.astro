@@ -1,6 +1,7 @@
 <!-- BinaryForge contact form. Plain HTML, browser validation only.
      OWNER: add your form endpoint in src/data/site.ts. Until then the
-     form shows a notice instead of sending. No JavaScript validation. -->
+     form shows a notice instead of sending. Field words live in
+     src/data/content.ts (contact.form). No JavaScript validation. -->
 ---
 import { site } from '../data/site';
 import { contact } from '../data/content';
@@ -9,27 +10,42 @@ const hasEndpoint = site.formEndpoint.length > 0;
 const f = contact.form;
 ---
 
-{
-  hasEndpoint ? (
-    <form
-      class="form"
-      action={site.formEndpoint}
-      method="POST"
-      aria-label="Contact form"
-    >
+<form
+  class="form"
+  action={hasEndpoint ? site.formEndpoint : undefined}
+  method="POST"
+  aria-label="Contact form"
+>
       <div class="field">
-        <label for="cf-name">{f.nameLabel}</label>
+        <label class="sr-only" for="cf-first">
+          {f.firstNameLabel}
+        </label>
         <input
-          id="cf-name"
-          name="name"
+          id="cf-first"
+          name="firstName"
           type="text"
-          autocomplete="name"
-          placeholder={f.namePlaceholder}
+          autocomplete="given-name"
+          placeholder={f.firstNamePlaceholder}
           required
         />
       </div>
       <div class="field">
-        <label for="cf-email">{f.emailLabel}</label>
+        <label class="sr-only" for="cf-surname">
+          {f.surnameLabel}
+        </label>
+        <input
+          id="cf-surname"
+          name="surname"
+          type="text"
+          autocomplete="family-name"
+          placeholder={f.surnamePlaceholder}
+          required
+        />
+      </div>
+      <div class="field">
+        <label class="sr-only" for="cf-email">
+          {f.emailLabel}
+        </label>
         <input
           id="cf-email"
           name="email"
@@ -40,7 +56,21 @@ const f = contact.form;
         />
       </div>
       <div class="field">
-        <label for="cf-message">{f.messageLabel}</label>
+        <label class="sr-only" for="cf-phone">
+          {f.phoneLabel}
+        </label>
+        <input
+          id="cf-phone"
+          name="phone"
+          type="tel"
+          autocomplete="tel"
+          placeholder={f.phonePlaceholder}
+        />
+      </div>
+      <div class="field field-full">
+        <label class="sr-only" for="cf-message">
+          {f.messageLabel}
+        </label>
         <textarea
           id="cf-message"
           name="message"
@@ -49,86 +79,113 @@ const f = contact.form;
           required
         />
       </div>
+      <label class="consent">
+        <input type="checkbox" name="consent" required />
+        <span>{f.consent}</span>
+      </label>
       <button class="btn btn-primary form-submit" type="submit">
         {f.submit}
       </button>
     </form>
-  ) : (
-    <div class="form form-idle" role="note" aria-label="Form not connected">
-      <p class="form-idle-title">{f.submit}</p>
-      <p>{f.note}</p>
-      <p>
-        Email us directly:{' '}
-        <a class="prose-link" href={`mailto:${site.email}`}>
-          {site.email}
-        </a>
-      </p>
-    </div>
+{
+  /* Visible until the owner adds a form endpoint in site.ts. */
+  !hasEndpoint && (
+    <p class="form-note">
+      {f.note}{' '}
+      <a class="prose-link" href={`mailto:${site.email}`}>
+        {site.email}
+      </a>
+    </p>
   )
 }
 
 <style>
+  /* Two-column form like the reference: pairs side by side,
+     message, consent and submit full width. */
   .form {
     display: grid;
-    gap: 32px;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
   }
   .field {
     display: grid;
-    gap: 12px;
   }
-  .field label {
-    font-size: 0.875rem;
-    font-weight: 600;
-    letter-spacing: 0.01em;
+  .field-full,
+  .consent,
+  .form-submit {
+    grid-column: 1 / -1;
   }
   .field input,
   .field textarea {
     width: 100%;
-    padding: 16px 4px;
+    min-width: 0;
     font: inherit;
-    font-size: 1.0625rem;
+    font-size: 1rem;
     color: var(--text);
     background: var(--input-bg);
-    border: 0;
-    border-bottom: 1px solid var(--border);
-    border-radius: 0;
-    transition: border-color 200ms ease-out;
+    border: 1px solid var(--border);
+    transition:
+      border-color 150ms ease-out,
+      box-shadow 150ms ease-out;
+  }
+  .field input {
+    height: 60px;
+    padding: 0 24px;
+    border-radius: 999px;
   }
   .field textarea {
+    min-height: 150px;
+    padding: 20px 24px;
+    border-radius: 24px;
     resize: vertical;
-    min-height: 140px;
     line-height: 1.6;
   }
   .field input::placeholder,
   .field textarea::placeholder {
     color: var(--muted);
-    opacity: 0.7;
+    opacity: 0.8;
   }
   .field input:hover,
   .field textarea:hover {
-    border-bottom-color: var(--muted);
+    border-color: var(--muted);
   }
-  /* Clear accent focus ring on hairline inputs. */
   .field input:focus,
   .field textarea:focus {
     outline: none;
-    border-bottom-color: var(--accent);
-    box-shadow: 0 1px 0 0 var(--accent);
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--ring-soft);
+  }
+  /* Consent row: native checkbox tinted to the theme. */
+  .consent {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    margin-top: 4px;
+    font-size: 0.9375rem;
+    line-height: 1.55;
+    color: var(--muted);
+    cursor: pointer;
+  }
+  .consent input {
+    flex: none;
+    width: 20px;
+    height: 20px;
+    margin-top: 2px;
+    accent-color: var(--accent);
   }
   .form-submit {
-    justify-self: start;
+    width: 100%;
     margin-top: 8px;
   }
-  /* Shown while no endpoint is configured. */
-  .form-idle {
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    padding: 32px;
-    gap: 16px;
+  /* Shown until the owner adds a form endpoint in site.ts. */
+  .form-note {
+    margin-top: 16px;
+    font-size: 0.9375rem;
     color: var(--muted);
   }
-  .form-idle-title {
-    color: var(--text);
-    font-weight: 600;
+  @media (max-width: 640px) {
+    .form {
+      grid-template-columns: 1fr;
+    }
   }
 </style>

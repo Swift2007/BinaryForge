@@ -4,16 +4,16 @@
    Accent (deep navy) is used sparingly: buttons, focus ring, details. */
 :root {
   color-scheme: light;
-  --bg: #edf0f4;
-  --bg-alt: #e2e8ef;
+  --bg: #dbe0e6;
+  --bg-alt: #ccd2d9;
   --surface: #ffffff;
-  --border: #cfdeeb;
+  --border: #b9c9d8;
   --text: #0a1931;
   --muted: #3d5a76;
   --accent: #1a3d63;
   --accent-hover: #0a1931;
   --accent-ink: #ffffff; /* white text on the navy button */
-  --nav-bg: #ffffff;
+  --nav-bg: rgb(255 255 255 / 0.6);
   --bar-shadow: rgb(10 25 49 / 0.08);
   --focus-ring: #1a3d63;
   --ring-soft: rgb(26 61 99 / 0.16);

@@ -71,12 +71,18 @@ export const contact = {
   intro:
     'Tell us what you have in mind. We reply within two working days.',
   form: {
-    nameLabel: 'Name',
-    namePlaceholder: 'Your name',
+    firstNameLabel: 'First name',
+    firstNamePlaceholder: 'First name',
+    surnameLabel: 'Surname',
+    surnamePlaceholder: 'Surname',
     emailLabel: 'Email',
-    emailPlaceholder: 'you@company.com',
+    emailPlaceholder: 'Email',
+    phoneLabel: 'Phone',
+    phonePlaceholder: 'Phone',
     messageLabel: 'Message',
-    messagePlaceholder: 'What do you want to build?',
+    messagePlaceholder: 'Message',
+    consent:
+      'I consent to BinaryForge using the information in this form to reply to my message.',
     submit: 'Send message',
     note: 'This form is not connected yet. Add your form endpoint in src/data/site.ts.',
     successTitle: 'Thanks. We got your message.',
