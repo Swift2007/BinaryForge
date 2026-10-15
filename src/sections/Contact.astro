@@ -1,0 +1,76 @@
+<!-- BinaryForge contact: plain details one side, minimal form other.
+     OWNER: contact details come from src/data/site.ts. Words from
+     src/data/content.ts (contact). -->
+---
+import ContactForm from '../components/ContactForm.astro';
+import { site } from '../data/site';
+import { contact } from '../data/content';
+---
+
+<section id="contact" class="section contact" aria-labelledby="contact-heading">
+  <div class="container">
+    <p class="eyebrow">{contact.eyebrow}</p>
+    <h2 id="contact-heading" class="h2">{contact.heading}</h2>
+    <p class="body-copy">{contact.intro}</p>
+
+    <div class="contact-grid">
+      <address class="contact-details">
+        <a class="detail-email" href={`mailto:${site.email}`}>
+          {site.email}
+        </a>
+        <span>{site.phone}</span>
+        <span>{site.location}</span>
+      </address>
+      <div>
+        <ContactForm />
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .contact .eyebrow {
+    margin-bottom: 24px;
+  }
+  .contact .h2 {
+    max-width: 16ch;
+    margin-bottom: 16px;
+  }
+  .contact .body-copy {
+    margin-bottom: 64px;
+  }
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 80px;
+    align-items: start;
+  }
+  .contact-details {
+    display: grid;
+    gap: 16px;
+    font-style: normal;
+    font-size: 1.0625rem;
+  }
+  .detail-email {
+    font-size: clamp(1.25rem, 1.1rem + 0.6vw, 1.5rem);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--text);
+    text-decoration: none;
+    overflow-wrap: anywhere;
+  }
+  .detail-email:hover {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    text-decoration-color: var(--accent);
+  }
+  .contact-details span {
+    color: var(--muted);
+  }
+  @media (max-width: 860px) {
+    .contact-grid {
+      grid-template-columns: 1fr;
+      gap: 48px;
+    }
+  }
+</style>

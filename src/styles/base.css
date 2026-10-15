@@ -1,0 +1,229 @@
+/* BinaryForge base styles: reset, typography, layout, buttons, focus.
+   Owner: type and spacing live here. Colors live in variables.css. */
+
+/* Self-hosted Inter via @fontsource (woff2 copied at build time).
+   Fallback is metric-matched so swapping causes no layout shift.
+   Two weights only: 400 + 600. */
+@import '@fontsource/inter/400.css';
+@import '@fontsource/inter/600.css';
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth; /* smooth anchor scrolling, CSS only, no JS */
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family:
+    'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  font-size: 1.0625rem; /* 17px */
+  line-height: 1.6;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+  transition: background-color 200ms ease-out, color 200ms ease-out;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Single centered container. Everything aligns to this. */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: 24px;
+}
+
+/* Sections breathe: one idea per screen. */
+.section {
+  padding-block: 140px;
+  scroll-margin-top: 72px; /* offset for the sticky navbar */
+}
+@media (max-width: 768px) {
+  .section {
+    padding-block: 80px;
+  }
+}
+
+/* Type scale. Headlines: tight, confident, under 8 words. */
+h1,
+h2,
+h3 {
+  font-weight: 600;
+  line-height: 1.08;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+}
+
+.display {
+  font-size: clamp(2.75rem, 2rem + 4.5vw, 5.5rem); /* 44px -> 88px */
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+}
+
+.h2 {
+  font-size: clamp(2rem, 1.5rem + 2.5vw, 3rem); /* 32px -> 48px */
+}
+
+.lede {
+  font-size: clamp(1.125rem, 1.05rem + 0.5vw, 1.25rem); /* 18 -> 20px */
+  color: var(--muted);
+  max-width: 38rem;
+}
+
+.body-copy {
+  color: var(--muted);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  max-width: 65ch; /* readable measure, 60-65 characters */
+}
+
+/* Quiet overline label used above section headings. */
+.eyebrow {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* Buttons: same height (52px) and subtle radius (8px) everywhere. */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 52px;
+  padding: 0 28px;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition:
+    background-color 200ms ease-out,
+    color 200ms ease-out,
+    border-color 200ms ease-out,
+    transform 200ms ease-out;
+}
+.btn:active {
+  transform: translateY(1px);
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+.btn-primary:hover {
+  background: var(--accent-hover);
+}
+
+/* Secondary: text link with a sliding arrow. */
+.link-arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 52px;
+  color: var(--text);
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+}
+.link-arrow .arrow {
+  transition: transform 200ms ease-out;
+}
+.link-arrow:hover .arrow {
+  transform: translateX(4px);
+}
+.link-arrow:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+/* Text links elsewhere: underline slides in on hover. */
+a {
+  color: inherit;
+}
+.prose-link {
+  color: var(--text);
+  text-decoration: underline;
+  text-decoration-color: var(--border);
+  text-underline-offset: 3px;
+  transition: text-decoration-color 200ms ease-out;
+}
+.prose-link:hover {
+  text-decoration-color: var(--accent);
+}
+
+/* Focus: visible 2px accent offset ring on every interactive element. */
+:where(a, button, input, textarea, summary, [tabindex]):focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Selection, caret and scrollbar match the theme. */
+::selection {
+  background: var(--selection-bg);
+  color: var(--text);
+}
+input,
+textarea {
+  caret-color: var(--accent);
+}
+::-webkit-scrollbar {
+  width: 12px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 8px;
+  border: 3px solid var(--bg);
+}
+
+/* Screen-reader-only helper. */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

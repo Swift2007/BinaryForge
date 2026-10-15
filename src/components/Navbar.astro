@@ -1,0 +1,206 @@
+<!-- BinaryForge navbar: sticky, hairline border, blurred background.
+     OWNER: links come from src/data/site.ts. Mobile menu is a <details>
+     element: HTML and CSS only, keyboard accessible, no JavaScript. -->
+---
+import Logo from './Logo.astro';
+import { site } from '../data/site';
+---
+
+<header class="navbar">
+  <div class="container navbar-inner">
+    <a class="brand" href="#top" aria-label="BinaryForge home">
+      <Logo />
+    </a>
+
+    <nav class="links" aria-label="Primary">
+      {
+        site.nav.map((item) => (
+          <a class="nav-link" href={item.href}>
+            {item.label}
+          </a>
+        ))
+      }
+    </nav>
+
+    <div class="actions">
+      <a class="btn btn-primary btn-nav" href="#contact">
+        Contact
+      </a>
+
+      <!-- Mobile menu: <details> gives open/close + keyboard + no-JS free. -->
+      <details class="menu">
+        <summary class="menu-button" aria-label="Open menu">
+          <span class="menu-icon" aria-hidden="true">
+            <span></span>
+            <span></span>
+          </span>
+          <span class="sr-only">Menu</span>
+        </summary>
+        <div class="menu-panel">
+          <nav aria-label="Mobile">
+            {
+              site.nav.map((item) => (
+                <a class="menu-link" href={item.href}>
+                  {item.label}
+                </a>
+              ))
+            }
+            <a class="btn btn-primary" href="#contact">
+              Contact
+            </a>
+          </nav>
+        </div>
+      </details>
+    </div>
+  </div>
+</header>
+
+<style>
+  .navbar {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    border-bottom: 1px solid var(--border);
+    background: var(--nav-bg);
+  }
+  .navbar-inner {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    height: 72px;
+  }
+  .brand {
+    display: inline-flex;
+    line-height: 0;
+    text-decoration: none;
+  }
+  .links {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    margin-left: auto;
+  }
+  .nav-link {
+    position: relative;
+    color: var(--muted);
+    font-size: 0.9375rem;
+    font-weight: 400;
+    text-decoration: none;
+    padding-block: 8px;
+    transition: color 200ms ease-out;
+  }
+  .nav-link:hover {
+    color: var(--text);
+  }
+  /* Active section: tiny accent underline. JS-free via :target context;
+     hover state carries the interaction; current page anchor styling
+     stays quiet on purpose. */
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 100%;
+    bottom: 2px;
+    height: 1px;
+    background: var(--accent);
+    transition: right 200ms ease-out;
+  }
+  .nav-link:hover::after {
+    right: 0;
+  }
+  .actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .btn-nav {
+    min-height: 44px;
+    padding: 0 20px;
+    font-size: 0.9375rem;
+  }
+
+  /* Mobile menu (details/popover-free, pure HTML+CSS). */
+  .menu {
+    display: none;
+    position: relative;
+  }
+  .menu-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    cursor: pointer;
+    list-style: none;
+    color: var(--text);
+  }
+  .menu-button::-webkit-details-marker {
+    display: none;
+  }
+  .menu-button:hover {
+    border-color: var(--muted);
+  }
+  .menu-icon {
+    display: grid;
+    gap: 6px;
+  }
+  .menu-icon span {
+    display: block;
+    width: 18px;
+    height: 1.5px;
+    background: currentColor;
+    transition: transform 200ms ease-out;
+  }
+  .menu[open] .menu-icon span:first-child {
+    transform: translateY(3.75px) rotate(45deg);
+  }
+  .menu[open] .menu-icon span:last-child {
+    transform: translateY(-3.75px) rotate(-45deg);
+  }
+  .menu-panel {
+    position: absolute;
+    right: 0;
+    top: calc(100% + 12px);
+    min-width: 240px;
+    padding: 16px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+  }
+  .menu-panel nav {
+    display: grid;
+    gap: 4px;
+  }
+  .menu-link {
+    padding: 12px;
+    border-radius: 8px;
+    color: var(--text);
+    text-decoration: none;
+    font-size: 1rem;
+  }
+  .menu-link:hover {
+    background: var(--bg-alt);
+  }
+  .menu-panel .btn {
+    margin-top: 8px;
+    width: 100%;
+  }
+
+  @media (max-width: 860px) {
+    .links,
+    .btn-nav {
+      display: none;
+    }
+    .menu {
+      display: block;
+    }
+    .navbar-inner {
+      gap: 16px;
+    }
+    .actions {
+      margin-left: auto;
+    }
+  }
+</style>

@@ -1,0 +1,77 @@
+<!-- BinaryForge "Why we exist": statement + three quiet principles.
+     OWNER: edit the story and principles in src/data/content.ts (whyUs). -->
+---
+import { whyUs } from '../data/content';
+---
+
+<section id="why-us" class="section why" aria-labelledby="why-heading">
+  <div class="container">
+    <p class="eyebrow">{whyUs.eyebrow}</p>
+    <h2 id="why-heading" class="sr-only">Why we exist</h2>
+    <p class="statement">{whyUs.statement}</p>
+    <div class="principles">
+      {
+        whyUs.principles.map((p) => (
+          <div class="principle">
+            <h3>{p.title}</h3>
+            <p>{p.text}</p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .why .eyebrow {
+    margin-bottom: 32px;
+  }
+  .statement {
+    font-size: clamp(1.5rem, 1.2rem + 1.6vw, 2.125rem); /* 24 -> 34px */
+    line-height: 1.4;
+    letter-spacing: -0.015em;
+    font-weight: 400;
+    color: var(--text);
+    max-width: 28ch;
+    text-wrap: balance;
+  }
+  /* Three quiet columns separated by 1px hairlines. No icons. */
+  .principles {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin-top: 80px;
+    border-top: 1px solid var(--border);
+  }
+  .principle {
+    padding: 32px 32px 8px 0;
+  }
+  .principle + .principle {
+    border-left: 1px solid var(--border);
+    padding-left: 32px;
+  }
+  .principle h3 {
+    font-size: 1.0625rem;
+    letter-spacing: -0.01em;
+    margin-bottom: 12px;
+  }
+  .principle p {
+    color: var(--muted);
+    font-size: 1rem;
+    line-height: 1.6;
+    max-width: 32ch;
+  }
+  @media (max-width: 768px) {
+    .principles {
+      grid-template-columns: 1fr;
+      margin-top: 64px;
+    }
+    .principle {
+      padding: 32px 0;
+    }
+    .principle + .principle {
+      border-left: 0;
+      border-top: 1px solid var(--border);
+      padding-left: 0;
+    }
+  }
+</style>

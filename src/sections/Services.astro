@@ -1,0 +1,111 @@
+<!-- BinaryForge services: four borderless rows with hairline dividers.
+     OWNER: edit titles and descriptions in src/data/content.ts (services). -->
+---
+import { services } from '../data/content';
+---
+
+<section id="services" class="section services" aria-labelledby="services-heading">
+  <div class="container">
+    <p class="eyebrow">{services.eyebrow}</p>
+    <h2 id="services-heading" class="h2">{services.heading}</h2>
+    <p class="body-copy">{services.intro}</p>
+
+    <ul class="service-list">
+      {
+        services.items.map((s) => (
+          <li class="service">
+            <span class="service-index" aria-hidden="true">
+              {s.index}
+            </span>
+            <div class="service-body">
+              <h3>{s.title}</h3>
+              <p>{s.text}</p>
+            </div>
+            <a
+              class="service-link"
+              href={services.itemCta.href}
+              aria-label={`${services.itemCta.label}: ${s.title}`}
+            >
+              <span class="service-link-text">{services.itemCta.label}</span>
+              <span class="arrow" aria-hidden="true">
+                &rarr;
+              </span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  .services .eyebrow {
+    margin-bottom: 24px;
+  }
+  .services .h2 {
+    margin-bottom: 16px;
+  }
+  .services .body-copy {
+    margin-bottom: 64px;
+  }
+  .service-list {
+    list-style: none;
+    padding: 0;
+    border-top: 1px solid var(--border);
+  }
+  /* Large borderless cells, one hairline between each. Quiet by design. */
+  .service {
+    display: grid;
+    grid-template-columns: 80px 1fr auto;
+    gap: 24px;
+    align-items: center;
+    padding-block: 40px;
+    border-bottom: 1px solid var(--border);
+  }
+  .service-index {
+    font-size: 0.875rem;
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.04em;
+  }
+  .service-body h3 {
+    font-size: clamp(1.25rem, 1.1rem + 0.6vw, 1.5rem);
+    margin-bottom: 8px;
+  }
+  .service-body p {
+    color: var(--muted);
+    font-size: 1rem;
+    max-width: 52ch;
+  }
+  .service-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--muted);
+    font-size: 0.9375rem;
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: color 200ms ease-out;
+  }
+  .service-link .arrow {
+    transition: transform 200ms ease-out;
+  }
+  .service-link:hover {
+    color: var(--text);
+  }
+  .service-link:hover .arrow {
+    transform: translateX(4px);
+    color: var(--accent);
+  }
+  @media (max-width: 768px) {
+    .service {
+      grid-template-columns: 1fr;
+      gap: 12px;
+      padding-block: 32px;
+    }
+    .service-link {
+      margin-top: 8px;
+    }
+  }
+</style>

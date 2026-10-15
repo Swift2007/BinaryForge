@@ -1,0 +1,126 @@
+<!-- BinaryForge footer: one quiet bar. Logo, links, contact, socials.
+     OWNER: all text comes from src/data/site.ts and content.ts. -->
+---
+import Logo from './Logo.astro';
+import { site } from '../data/site';
+import { footer } from '../data/content';
+---
+
+<footer class="footer">
+  <div class="container footer-inner">
+    <div class="footer-brand">
+      <a href="#top" aria-label="BinaryForge home">
+        <Logo />
+      </a>
+      <p>{footer.note}</p>
+    </div>
+
+    <nav class="footer-col" aria-label="Footer">
+      {
+        site.nav.map((item) => (
+          <a href={item.href}>{item.label}</a>
+        ))
+      }
+    </nav>
+
+    <div class="footer-col">
+      <a href={`mailto:${site.email}`}>{site.email}</a>
+      <span>{site.phone}</span>
+      <span>{site.location}</span>
+    </div>
+  </div>
+
+  <div class="container footer-base">
+    <p>{footer.rights}</p>
+    <nav class="footer-social" aria-label="Social">
+      {
+        site.socials.map((s) => (
+          <a href={s.href} rel="noopener noreferrer">
+            {s.label}
+          </a>
+        ))
+      }
+    </nav>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    border-top: 1px solid var(--border);
+    padding-block: 48px 32px;
+  }
+  .footer-inner {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr;
+    gap: 48px;
+    align-items: start;
+  }
+  .footer-brand {
+    display: grid;
+    gap: 16px;
+    justify-items: start;
+  }
+  .footer-brand p {
+    color: var(--muted);
+    font-size: 0.9375rem;
+    max-width: 32ch;
+  }
+  .footer-col {
+    display: grid;
+    gap: 12px;
+    align-content: start;
+    font-size: 0.9375rem;
+  }
+  .footer-col a {
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 200ms ease-out;
+  }
+  .footer-col a:hover {
+    color: var(--text);
+  }
+  .footer-col span {
+    color: var(--muted);
+  }
+  .footer-base {
+    margin-top: 48px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px 32px;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .footer-base p {
+    color: var(--muted);
+    font-size: 0.875rem;
+  }
+  .footer-social {
+    display: flex;
+    gap: 24px;
+    font-size: 0.875rem;
+  }
+  .footer-social a {
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 200ms ease-out;
+  }
+  .footer-social a:hover {
+    color: var(--text);
+  }
+  @media (max-width: 860px) {
+    .footer-inner {
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+    .footer-brand {
+      grid-column: 1 / -1;
+    }
+  }
+  @media (max-width: 520px) {
+    .footer-inner {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

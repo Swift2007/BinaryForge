@@ -1,0 +1,8 @@
+/* BinaryForge motion: minimal by design. Interactive elements use short
+   transitions defined alongside the components. No scroll animation:
+   content is simply present, which also respects prefers-reduced-motion. */
+
+/* Kept as a no-op so any remaining `reveal` classes render normally. */
+.reveal {
+  opacity: 1;
+}

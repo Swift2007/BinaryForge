@@ -1,0 +1,54 @@
+<!-- BinaryForge base layout: html shell, SEO and global CSS.
+     OWNER: edit the SEO text only if the company description changes.
+     Single light theme: no theme script, no flash possible. -->
+---
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import { site } from '../data/site';
+import '../styles/variables.css';
+import '../styles/base.css';
+import '../styles/animations.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+const {
+  title = 'BinaryForge | Software Solutions',
+  description = 'BinaryForge is a small software team building mobile apps, websites, web applications and custom software. Where ideas are forged into software.',
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={site.canonical} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="BinaryForge" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={site.canonical} />
+    <meta property="og:image" content="/binaryforge-icon.svg" />
+
+    <meta name="theme-color" content="#FFFFFF" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <!-- Inter is self-hosted and bundled from @fontsource at build time
+         (see src/styles/base.css), so no render-blocking font requests. -->
+
+    <!-- Single light theme: no script needed, nothing to flash. -->
+  </head>
+  <body id="top">
+    <a class="sr-only" href="#main">Skip to content</a>
+    <Navbar />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

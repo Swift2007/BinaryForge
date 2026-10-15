@@ -1,0 +1,15 @@
+<!-- BinaryForge button. Primary = accent fill, nothing else.
+     OWNER: use variant="primary" for the one main action per section.
+     Props: href, variant ('primary'), label. -->
+---
+interface Props {
+  href: string;
+  label: string;
+  variant?: 'primary';
+}
+const { href, label, variant = 'primary' } = Astro.props;
+---
+
+<a class:list={['btn', variant === 'primary' && 'btn-primary']} href={href}>
+  {label}
+</a>

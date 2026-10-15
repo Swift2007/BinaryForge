@@ -1,0 +1,134 @@
+<!-- BinaryForge contact form. Plain HTML, browser validation only.
+     OWNER: add your form endpoint in src/data/site.ts. Until then the
+     form shows a notice instead of sending. No JavaScript validation. -->
+---
+import { site } from '../data/site';
+import { contact } from '../data/content';
+
+const hasEndpoint = site.formEndpoint.length > 0;
+const f = contact.form;
+---
+
+{
+  hasEndpoint ? (
+    <form
+      class="form"
+      action={site.formEndpoint}
+      method="POST"
+      aria-label="Contact form"
+    >
+      <div class="field">
+        <label for="cf-name">{f.nameLabel}</label>
+        <input
+          id="cf-name"
+          name="name"
+          type="text"
+          autocomplete="name"
+          placeholder={f.namePlaceholder}
+          required
+        />
+      </div>
+      <div class="field">
+        <label for="cf-email">{f.emailLabel}</label>
+        <input
+          id="cf-email"
+          name="email"
+          type="email"
+          autocomplete="email"
+          placeholder={f.emailPlaceholder}
+          required
+        />
+      </div>
+      <div class="field">
+        <label for="cf-message">{f.messageLabel}</label>
+        <textarea
+          id="cf-message"
+          name="message"
+          rows="5"
+          placeholder={f.messagePlaceholder}
+          required
+        />
+      </div>
+      <button class="btn btn-primary form-submit" type="submit">
+        {f.submit}
+      </button>
+    </form>
+  ) : (
+    <div class="form form-idle" role="note" aria-label="Form not connected">
+      <p class="form-idle-title">{f.submit}</p>
+      <p>{f.note}</p>
+      <p>
+        Email us directly:{' '}
+        <a class="prose-link" href={`mailto:${site.email}`}>
+          {site.email}
+        </a>
+      </p>
+    </div>
+  )
+}
+
+<style>
+  .form {
+    display: grid;
+    gap: 32px;
+  }
+  .field {
+    display: grid;
+    gap: 12px;
+  }
+  .field label {
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+  }
+  .field input,
+  .field textarea {
+    width: 100%;
+    padding: 12px 14px;
+    font: inherit;
+    font-size: 1rem;
+    color: var(--text);
+    background: var(--input-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    transition:
+      border-color 150ms ease-out,
+      box-shadow 150ms ease-out;
+  }
+  .field textarea {
+    resize: vertical;
+    min-height: 140px;
+    line-height: 1.6;
+  }
+  .field input::placeholder,
+  .field textarea::placeholder {
+    color: var(--muted);
+    opacity: 0.7;
+  }
+  .field input:hover,
+  .field textarea:hover {
+    border-bottom-color: var(--muted);
+  }
+  .field input:focus,
+  .field textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--ring-soft);
+  }
+  .form-submit {
+    justify-self: start;
+    margin-top: 8px;
+  }
+  /* Shown while no endpoint is configured. */
+  .form-idle {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 32px;
+    gap: 16px;
+    color: var(--muted);
+  }
+  .form-idle-title {
+    color: var(--text);
+    font-weight: 600;
+  }
+</style>

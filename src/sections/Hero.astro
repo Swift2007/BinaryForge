@@ -1,0 +1,58 @@
+<!-- BinaryForge hero: tagline, one sentence, two actions.
+     OWNER: all words come from src/data/content.ts (hero). -->
+---
+import Button from '../components/Button.astro';
+import { hero } from '../data/content';
+---
+
+<section class="hero" aria-labelledby="hero-title">
+  <!-- Empty space is intentional: no graphics. -->
+  <div class="container hero-inner">
+    <h1 id="hero-title" class="display hero-title">{hero.title}</h1>
+    <p class="lede hero-lede">{hero.intro}</p>
+    <div class="hero-actions">
+      <Button href={hero.primaryCta.href} label={hero.primaryCta.label} />
+      <a class="link-arrow" href={hero.secondaryCta.href}>
+        {hero.secondaryCta.label}
+        <span class="arrow" aria-hidden="true">&rarr;</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    display: flex;
+    align-items: center;
+    min-height: 88svh; /* roughly the viewport height, room to breathe */
+    padding-block: 120px;
+  }
+  /* Quiet hero: type, alignment and whitespace only. */
+  .hero-inner {
+    position: relative;
+    display: grid;
+    gap: 32px;
+    justify-items: start; /* left edge alignment: headline, body, buttons */
+  }
+  .hero-title {
+    max-width: 12ch;
+  }
+  .hero-lede {
+    max-width: 38rem;
+  }
+  .hero-actions {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+  @media (max-width: 768px) {
+    .hero {
+      min-height: 88svh;
+      padding-block: 80px;
+    }
+    .hero-actions {
+      gap: 16px 24px;
+    }
+  }
+</style>

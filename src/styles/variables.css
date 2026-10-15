@@ -1,0 +1,20 @@
+/* BinaryForge design tokens. Single light theme: white-first, restrained.
+   Owner: safe to edit. Change colors here and the whole site follows.
+   Accent is used sparingly: primary button, focus ring, tiny details. */
+:root {
+  color-scheme: light;
+  --bg: #ffffff;
+  --bg-alt: #f7f7f5;
+  --surface: #ffffff;
+  --border: #e5e5e5;
+  --text: #171717;
+  --muted: #666666;
+  --accent: #c65d2e;
+  --accent-hover: #a94e26;
+  --accent-ink: #ffffff; /* white text on the accent button */
+  --nav-bg: #ffffff;
+  --focus-ring: #c65d2e;
+  --ring-soft: rgb(198 93 46 / 0.16);
+  --selection-bg: rgb(198 93 46 / 0.18);
+  --input-bg: #ffffff;
+}
