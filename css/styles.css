@@ -163,11 +163,20 @@ p { text-wrap: pretty; }
   display: flex; align-items: center; justify-content: space-between;
   gap: var(--s-4);
 }
-.brand { display: inline-flex; align-items: center; text-decoration: none; }
-.brand-logo {
-  height: 32px; width: auto;
-  border-radius: 8px;
+.brand { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; }
+.brand-mark {
+  height: 44px; width: 44px; flex: none;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgb(0 0 0 / .35);
 }
+.brand-word {
+  font-size: 1.35rem; font-weight: 800; letter-spacing: -.02em; line-height: 1;
+  color: var(--text); white-space: nowrap;
+}
+.brand-word em { font-style: normal; color: var(--accent); }
+.brand-footer { margin-bottom: 10px; }
+.brand-footer .brand-mark { height: 40px; width: 40px; }
+.brand-footer .brand-word { font-size: 1.25rem; }
 .nav-links {
   display: flex; align-items: center;
   gap: var(--s-8);
@@ -458,7 +467,6 @@ html[data-theme="light"] .form-status.err { color: #B3261E; }
   padding-block: var(--s-8);
 }
 .footer-brand p { margin-top: var(--s-2); }
-.footer-logo { height: 32px; width: auto; border-radius: 8px; }
 .footer-links {
   list-style: none; margin: 0; padding: 0;
   display: flex; gap: var(--s-6); flex-wrap: wrap; justify-content: center;

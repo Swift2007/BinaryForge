@@ -38,19 +38,12 @@ if(e.key==="Escape"&&menu.classList.contains("open")){setMenu(false);toggle.focu
 menu.addEventListener("click",function(e){
 if(e.target.closest("a"))setMenu(false);
 });
-/* Theme: dark default, light via toggle, remembered + logo swap */
+/* Theme: dark default, light via toggle, remembered */
 var themeBtn=document.getElementById("theme-toggle");
-var brandLogo=document.querySelector(".brand-logo");
-var footerLogo=document.querySelector(".footer-logo");
-var LOGO_DARK="assets/binaryforge-logo.svg";
-var LOGO_LIGHT="assets/binaryforge-logo-light.svg";
 function currentTheme(){return document.documentElement.getAttribute("data-theme")==="light"?"light":"dark";}
 function paintTheme(t){
 if(t==="light"){document.documentElement.setAttribute("data-theme","light");}
 else{document.documentElement.removeAttribute("data-theme");}
-var logo=t==="light"?LOGO_LIGHT:LOGO_DARK;
-if(brandLogo)brandLogo.src=logo;
-if(footerLogo)footerLogo.src=logo;
 if(themeBtn){
 var toLight=t!=="light";
 themeBtn.setAttribute("aria-pressed",String(!toLight));
