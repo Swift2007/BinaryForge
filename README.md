@@ -30,6 +30,7 @@ src/
   data/content.ts            # all page wording (hero, story, principles, services)
   styles/                    # variables.css, base.css, animations.css
 public/
+  hero-bg.jpg (hero backdrop, optimized ~120KB),
   binaryforge-logo-light.svg (navbar), binaryforge-logo.svg (footer card),
   binaryforge-icon.svg, favicon.svg (keep file names when swapping artwork)
 ```
