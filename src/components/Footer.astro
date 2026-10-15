@@ -1,57 +1,86 @@
-<!-- BinaryForge footer: one quiet bar. Logo, links, contact, socials.
-     OWNER: all text comes from src/data/site.ts and content.ts. -->
+<!-- BinaryForge footer: contained dark card with link columns and a
+     giant cropped wordmark. OWNER: links come from src/data/site.ts
+     (nav, contact, socials) and src/data/content.ts (services, footer). -->
 ---
 import Logo from './Logo.astro';
 import { site } from '../data/site';
-import { footer } from '../data/content';
+import { services, footer } from '../data/content';
 ---
 
 <footer class="footer">
-  <div class="container footer-inner">
-    <div class="footer-brand">
-      <a href="#top" aria-label="BinaryForge home">
-        <Logo />
-      </a>
-      <p>{footer.note}</p>
+  <div class="footer-card">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="#top" aria-label="BinaryForge home">
+          <Logo tone="dark" />
+        </a>
+        <p>{footer.note}</p>
+      </div>
+
+      <nav class="footer-col" aria-label="Services">
+        <h2 class="footer-heading">Services</h2>
+        {
+          services.items.map((s) => (
+            <a href="#services">{s.title}</a>
+          ))
+        }
+      </nav>
+
+      <nav class="footer-col" aria-label="Company">
+        <h2 class="footer-heading">Company</h2>
+        {
+          site.nav.map((item) => (
+            <a href={item.href}>{item.label}</a>
+          ))
+        }
+      </nav>
+
+      <div class="footer-col">
+        <h2 class="footer-heading">Contact</h2>
+        <a href={`mailto:${site.email}`}>{site.email}</a>
+        <span>{site.phone}</span>
+        <span>{site.location}</span>
+      </div>
+
+      <nav class="footer-col" aria-label="Social">
+        <h2 class="footer-heading">Social</h2>
+        {
+          site.socials.map((s) => (
+            <a href={s.href} rel="noopener noreferrer">
+              {s.label}
+            </a>
+          ))
+        }
+      </nav>
     </div>
 
-    <nav class="footer-col" aria-label="Footer">
-      {
-        site.nav.map((item) => (
-          <a href={item.href}>{item.label}</a>
-        ))
-      }
-    </nav>
-
-    <div class="footer-col">
-      <a href={`mailto:${site.email}`}>{site.email}</a>
-      <span>{site.phone}</span>
-      <span>{site.location}</span>
+    <div class="footer-base">
+      <p>{footer.rights}</p>
+      <a class="to-top" href="#top">Back to top</a>
     </div>
-  </div>
 
-  <div class="container footer-base">
-    <p>{footer.rights}</p>
-    <nav class="footer-social" aria-label="Social">
-      {
-        site.socials.map((s) => (
-          <a href={s.href} rel="noopener noreferrer">
-            {s.label}
-          </a>
-        ))
-      }
-    </nav>
+    <div class="footer-wordmark" aria-hidden="true">
+      <p class="wordmark">BinaryForge</p>
+    </div>
   </div>
 </footer>
 
 <style>
   .footer {
-    border-top: 1px solid var(--border);
-    padding-block: 48px 32px;
+    padding: 0 24px 24px;
   }
-  .footer-inner {
+  /* Contained dark card: the footer's whole identity. */
+  .footer-card {
+    max-width: 1200px;
+    margin-inline: auto;
+    padding: 64px 64px 0;
+    overflow: hidden;
+    background: var(--card);
+    border-radius: 24px;
+  }
+  .footer-top {
     display: grid;
-    grid-template-columns: 1.4fr 1fr 1fr;
+    grid-template-columns: 1.4fr 1fr 1fr 1fr 1fr;
     gap: 48px;
     align-items: start;
   }
@@ -61,9 +90,9 @@ import { footer } from '../data/content';
     justify-items: start;
   }
   .footer-brand p {
-    color: var(--muted);
+    color: var(--on-dark-muted);
     font-size: 0.9375rem;
-    max-width: 32ch;
+    max-width: 30ch;
   }
   .footer-col {
     display: grid;
@@ -71,56 +100,90 @@ import { footer } from '../data/content';
     align-content: start;
     font-size: 0.9375rem;
   }
+  .footer-heading {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--on-dark-muted);
+    margin-bottom: 4px;
+  }
   .footer-col a {
-    color: var(--muted);
+    color: var(--on-dark-muted);
     text-decoration: none;
     transition: color 200ms ease-out;
   }
   .footer-col a:hover {
-    color: var(--text);
+    color: var(--on-dark);
   }
   .footer-col span {
-    color: var(--muted);
+    color: var(--on-dark-muted);
   }
   .footer-base {
-    margin-top: 48px;
-    padding-top: 24px;
-    border-top: 1px solid var(--border);
     display: flex;
     flex-wrap: wrap;
     gap: 16px 32px;
     align-items: center;
     justify-content: space-between;
+    margin-top: 48px;
+    padding-top: 24px;
+    border-top: 1px solid var(--card-line);
   }
   .footer-base p {
-    color: var(--muted);
+    color: var(--on-dark-muted);
     font-size: 0.875rem;
   }
-  .footer-social {
-    display: flex;
-    gap: 24px;
+  .to-top {
+    color: var(--on-dark-muted);
     font-size: 0.875rem;
-  }
-  .footer-social a {
-    color: var(--muted);
     text-decoration: none;
-    transition: color 200ms ease-out;
   }
-  .footer-social a:hover {
-    color: var(--text);
+  .to-top:hover {
+    color: var(--on-dark);
   }
-  @media (max-width: 860px) {
-    .footer-inner {
-      grid-template-columns: 1fr 1fr;
+  /* Giant wordmark cropped by the card edge, fading as it goes. */
+  .footer-wordmark {
+    margin-top: 40px;
+    user-select: none;
+    display: flex;
+    justify-content: center;
+  }
+  .wordmark {
+    font-size: clamp(3.5rem, 12.5vw, 12rem);
+    font-weight: 600;
+    letter-spacing: -0.04em;
+    line-height: 0.9;
+    text-align: center;
+    white-space: nowrap;
+    margin-bottom: -0.16em;
+    background: linear-gradient(
+      180deg,
+      var(--on-dark) 40%,
+      rgb(255 255 255 / 0.05)
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  @media (max-width: 1024px) {
+    .footer-top {
+      grid-template-columns: 1fr 1fr 1fr;
       gap: 32px;
     }
     .footer-brand {
       grid-column: 1 / -1;
     }
   }
-  @media (max-width: 520px) {
-    .footer-inner {
-      grid-template-columns: 1fr;
+  @media (max-width: 640px) {
+    .footer {
+      padding: 0 16px 16px;
+    }
+    .footer-card {
+      padding: 48px 24px 0;
+      border-radius: 20px;
+    }
+    .footer-top {
+      grid-template-columns: 1fr 1fr;
     }
   }
 </style>

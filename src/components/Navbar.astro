@@ -1,13 +1,14 @@
-<!-- BinaryForge navbar: sticky, hairline border, blurred background.
-     OWNER: links come from src/data/site.ts. Mobile menu is a <details>
-     element: HTML and CSS only, keyboard accessible, no JavaScript. -->
+<!-- BinaryForge navbar: floating rounded bar, logo left, links centered,
+     contact button right. OWNER: links come from src/data/site.ts. Mobile
+     menu is a <details> element: HTML and CSS only, keyboard accessible,
+     no JavaScript. -->
 ---
 import Logo from './Logo.astro';
 import { site } from '../data/site';
 ---
 
 <header class="navbar">
-  <div class="container navbar-inner">
+  <div class="navbar-bar">
     <a class="brand" href="#top" aria-label="BinaryForge home">
       <Logo />
     </a>
@@ -23,8 +24,8 @@ import { site } from '../data/site';
     </nav>
 
     <div class="actions">
-      <a class="btn btn-primary btn-nav" href="#contact">
-        Contact
+      <a class="btn btn-dark btn-nav" href="#contact">
+        Start a project
       </a>
 
       <!-- Mobile menu: <details> gives open/close + keyboard + no-JS free. -->
@@ -45,8 +46,8 @@ import { site } from '../data/site';
                 </a>
               ))
             }
-            <a class="btn btn-primary" href="#contact">
-              Contact
+            <a class="btn btn-dark" href="#contact">
+              Start a project
             </a>
           </nav>
         </div>
@@ -56,29 +57,38 @@ import { site } from '../data/site';
 </header>
 
 <style>
+  /* Floating bar: sticky with a 12px offset, page scrolls beneath it. */
   .navbar {
     position: sticky;
-    top: 0;
+    top: 12px;
     z-index: 50;
-    border-bottom: 1px solid var(--border);
-    background: var(--nav-bg);
+    padding-inline: 24px;
   }
-  .navbar-inner {
-    display: flex;
+  .navbar-bar {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
     align-items: center;
-    gap: 32px;
-    height: 72px;
+    gap: 24px;
+    max-width: 1200px;
+    height: 64px;
+    margin-inline: auto;
+    padding-inline: 20px;
+    background: var(--nav-bg);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    box-shadow: 0 8px 24px var(--bar-shadow);
   }
   .brand {
     display: inline-flex;
+    justify-self: start;
     line-height: 0;
     text-decoration: none;
   }
   .links {
     display: flex;
     align-items: center;
+    justify-self: center;
     gap: 32px;
-    margin-left: auto;
   }
   .nav-link {
     position: relative;
@@ -92,9 +102,6 @@ import { site } from '../data/site';
   .nav-link:hover {
     color: var(--text);
   }
-  /* Active section: tiny accent underline. JS-free via :target context;
-     hover state carries the interaction; current page anchor styling
-     stays quiet on purpose. */
   .nav-link::after {
     content: '';
     position: absolute;
@@ -111,7 +118,16 @@ import { site } from '../data/site';
   .actions {
     display: flex;
     align-items: center;
+    justify-self: end;
     gap: 16px;
+  }
+  /* Navy button, like the reference's dark button: quiet and solid. */
+  .btn-dark {
+    background: var(--accent);
+    color: var(--accent-ink);
+  }
+  .btn-dark:hover {
+    background: var(--accent-hover);
   }
   .btn-nav {
     min-height: 44px;
@@ -168,6 +184,7 @@ import { site } from '../data/site';
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: 12px;
+    box-shadow: 0 8px 24px var(--bar-shadow);
   }
   .menu-panel nav {
     display: grid;
@@ -189,18 +206,15 @@ import { site } from '../data/site';
   }
 
   @media (max-width: 860px) {
+    .navbar {
+      padding-inline: 16px;
+    }
     .links,
     .btn-nav {
       display: none;
     }
     .menu {
       display: block;
-    }
-    .navbar-inner {
-      gap: 16px;
-    }
-    .actions {
-      margin-left: auto;
     }
   }
 </style>

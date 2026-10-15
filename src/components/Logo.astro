@@ -1,12 +1,19 @@
-<!-- BinaryForge logo. Single light-theme artwork on white.
-     OWNER: to replace the artwork, keep the file name
-     public/binaryforge-logo-light.svg. -->
+<!-- BinaryForge logo. OWNER: to replace the artwork, keep the file names:
+     public/binaryforge-logo-light.svg (dark text, for light backgrounds),
+     public/binaryforge-logo.svg (light text, for dark backgrounds).
+     Props: tone ('light' on light backgrounds, 'dark' on dark ones). -->
 ---
+interface Props {
+  tone?: 'light' | 'dark';
+}
+const { tone = 'light' } = Astro.props;
+const src =
+  tone === 'dark' ? '/binaryforge-logo.svg' : '/binaryforge-logo-light.svg';
 ---
 
 <span class="logo">
   <img
-    src="/binaryforge-logo-light.svg"
+    src={src}
     alt="BinaryForge"
     width="168"
     height="32"
