@@ -24,6 +24,7 @@ npm run preview  # preview the built site
 src/
   layouts/BaseLayout.astro   # html shell, SEO, navbar + footer (single light theme)
   pages/index.astro          # assembles Hero, WhyUs, Services, Contact
+  pages/terms.astro, pages/privacy.astro  # legal placeholders (owner must replace)
   components/                # Navbar, Footer, Button, ContactForm, Logo
   sections/                  # Hero, WhyUs, Services, Contact
   data/site.ts               # company facts (email, phone, location, socials, form endpoint)

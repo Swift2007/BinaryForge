@@ -17,7 +17,7 @@ export const whyUs = {
   eyebrow: 'Why we exist',
   // One large statement paragraph, one to three sentences.
   statement:
-    'BinaryForge started as a few friends building software together. We wanted businesses to get software that is reliable, honest and fairly priced. That is still the whole idea.',
+    'BinaryForge started as a few friends building software together. We wanted businesses to get software that is reliable, honest and fairly priced, with long-running services meant to grow small and large businesses. That is still the whole idea.',
   principles: [
     {
       title: 'Reliable',

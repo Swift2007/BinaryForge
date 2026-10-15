@@ -56,6 +56,10 @@ import { services, footer } from '../data/content';
 
     <div class="footer-base">
       <p>{footer.rights}</p>
+      <nav class="footer-legal" aria-label="Legal">
+        <a href="/terms">Terms and Conditions</a>
+        <a href="/privacy">Privacy Policy</a>
+      </nav>
       <a class="to-top" href="#top">Back to top</a>
     </div>
 
@@ -141,9 +145,23 @@ import { services, footer } from '../data/content';
   .to-top:hover {
     color: var(--on-dark);
   }
+  .footer-legal {
+    display: flex;
+    gap: 24px;
+    font-size: 0.875rem;
+  }
+  .footer-legal a {
+    color: var(--on-dark-muted);
+    text-decoration: none;
+    transition: color 200ms ease-out;
+  }
+  .footer-legal a:hover {
+    color: var(--on-dark);
+  }
   /* Giant wordmark cropped by the card edge, fading as it goes. */
   .footer-wordmark {
     margin-top: 40px;
+    padding-bottom: 40px;
     user-select: none;
     display: flex;
     justify-content: center;
@@ -152,10 +170,10 @@ import { services, footer } from '../data/content';
     font-size: clamp(3.5rem, 12.5vw, 12rem);
     font-weight: 600;
     letter-spacing: -0.04em;
-    line-height: 0.9;
+    line-height: 1.15;
     text-align: center;
     white-space: nowrap;
-    margin-bottom: -0.16em;
+    margin-bottom: 0;
     background: linear-gradient(
       180deg,
       var(--on-dark) 40%,
