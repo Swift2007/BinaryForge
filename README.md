@@ -35,73 +35,72 @@ A single-page, semi-minimalist, responsive website with a dark charcoal theme, a
 
 ## Tech stack
 
-> Update this section to match what the project actually uses.
-
-- HTML, CSS and JavaScript (or [React + Vite / Next.js])
-- [Tailwind CSS / custom CSS]
-- Contact form powered by [Formspree / EmailJS / custom backend]
+- Plain HTML + CSS + JavaScript — no framework, no build step, no dependencies
+- Google Fonts: Inter (UI/body) + JetBrains Mono (tiny `// labels`)
+- Inline SVG icons (thin-line, currentColor) — no icon library
+- Contact form: client-side validation + `fetch` POST to Formspree (see `js/main.js` → `FORMSPREE_ENDPOINT`). Works with a friendly demo success state until you add your endpoint.
 
 ## Getting started
 
 ### Prerequisites
 
-- [Node.js](https://nodejs.org/) 18 or later (if using a build tool)
-- Git
+- Any modern browser. That is it — no Node, no build.
+- Optional: VS Code + Live Server extension, or Python / Node for a static server.
 
-### Installation
+### Run locally
 
 ```bash
-# Clone the repository
-git clone [REPOSITORY URL]
-cd binaryforge
+# Option 1: just open it
+# Double-click index.html — or right-click → Open with your browser.
 
-# Install dependencies (skip for plain HTML/CSS/JS)
-npm install
+# Option 2: local server (recommended — avoids font/CORS quirks)
+npx serve .
+# then open the printed http://localhost:3000
 
-# Start the development server
-npm run dev
+# Option 3: Python
+python -m http.server 8000
 ```
-
-For a plain HTML/CSS/JS version, open `index.html` in your browser or use a simple local server such as the VS Code "Live Server" extension.
 
 ### Build for production
 
-```bash
-npm run build
-```
+No build step. Ship the folder as-is (`index.html`, `css/`, `js/`, `assets/`).
 
 ## Project structure
 
-> Adjust to match your actual files.
-
+```text
 binaryforge/
-├── index.html
+├── index.html          # all sections: nav, hero, why, services, contact, footer
 ├── css/
-│   └── styles.css
+│   └── styles.css      # tokens, layout, cards, form, motion, breakpoints (commented)
 ├── js/
-│   └── main.js
+│   └── main.js         # nav, scrollspy, reveals, validation, Formspree hook
 ├── assets/
-│   ├── images/
-│   └── icons/
+│   ├── binaryforge-logo.svg        # dark-theme lockup (dark badge) — nav + footer
+│   ├── binaryforge-logo-light.svg  # light-theme lockup (`#F5F3EF` badge) — swapped in automatically
+│   ├── binaryforge-icon.svg        # square app/tab icon — used as favicon
+│   ├── favicon.svg                 # legacy fallback icon
+│   └── og-cover.svg    # social share placeholder — export to PNG (1200×630) if needed
 └── README.md
+```
 
 ## Editing content
 
-- **Text and copy:** edit the section content in `index.html` (or the matching components).
-- **Colors:** change the CSS variables at the top of the stylesheet.
-- **Services:** add or remove service cards in the Services section.
-- **Contact details:** update the email, phone, location and social links in the Contact section and footer.
-- **Contact form:** set your form endpoint or service key in the form configuration.
+- **Text and copy:** edit directly in `index.html`. Sections are commented (`NAV`, `HERO`, `WHY`, `SERVICES`, `CONTACT`, `FOOTER`). Search for `[EMAIL]`, `[PHONE]`, `[LOCATION]`, `[LINKS]` — replace all (they appear in Contact + footer).
+- **Colors:** change the CSS variables at the top of `css/styles.css` (`:root` → `--bg`, `--surface`, `--border`, `--text`, `--muted`, `--accent`, `--accent-hover`). Keep accent usage sparse (~5%).
+- **Services:** copy/paste an `article.service-card` block in the `#services` grid. Six included; grid handles 3→2→1 columns automatically.
+- **Contact details:** update the `[EMAIL]` / `[PHONE]` / `[LOCATION]` links in `#contact` and the footer, plus the social `[LINKS]`.
+- **Contact form:** open `js/main.js`, set `FORMSPREE_ENDPOINT = "https://formspree.io/f/YOUR_ID"`. Without it the form shows a demo success state (clearly marked). Compatible with EmailJS or any backend — swap the `fetch` call.
+- **Theme (dark / light):** dark is the default. The sun/moon button in the nav toggles `html[data-theme="light"]`, swaps the nav/footer logo to `binaryforge-logo-light.svg`, and remembers the choice in `localStorage` (`bf-theme`). All colors live as CSS vars in `css/styles.css` (`:root` + `html[data-theme="light"]`). Light palette: bg `#F5F3EF`, surface `#FFFFFF`, border `#E3DED4`, text `#1A1D23`, muted `#5C6470`, accent `#B25A1B` (AA on light), hover `#8F4A14`.
 
 ## Deployment
 
-The site can be hosted for free on:
+Static hosting — no build command, publish directory is the repo root (`.`).
 
-- [Netlify](https://www.netlify.com/)
-- [Vercel](https://vercel.com/)
-- [GitHub Pages](https://pages.github.com/)
+- **Netlify:** New site from Git → build command empty → publish directory `.` → Deploy. Or drag-and-drop the folder in Netlify Drop.
+- **Vercel:** Import repo → Framework preset “Other” → output directory `.` → Deploy.
+- **GitHub Pages:** Settings → Pages → Deploy from branch → `main` / root (`/`) → Save. Site appears at `https://<user>.github.io/<repo>/`.
 
-Connect the repository, set the build command (`npm run build`, if applicable) and the output folder, then deploy. Add a custom domain such as `binaryforge.com` in the hosting dashboard.
+Add a custom domain in your host dashboard when ready.
 
 ## Contributing
 

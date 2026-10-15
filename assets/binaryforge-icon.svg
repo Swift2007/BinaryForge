@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="512" height="512" role="img" aria-labelledby="bfi-t">
+  <title id="bfi-t">BinaryForge icon</title>
+  <defs>
+    <linearGradient id="bfi-tile" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1C212A"/>
+      <stop offset="1" stop-color="#12151B"/>
+    </linearGradient>
+    <linearGradient id="bfi-steel" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#F4F5F7"/>
+      <stop offset="1" stop-color="#B9BFC9"/>
+    </linearGradient>
+    <linearGradient id="bfi-ember" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#F29A58"/>
+      <stop offset="1" stop-color="#E8833A"/>
+    </linearGradient>
+    <radialGradient id="bfi-glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#E8833A" stop-opacity="0.30"/>
+      <stop offset="1" stop-color="#E8833A" stop-opacity="0"/>
+    </radialGradient>
+    <clipPath id="bfi-clip"><path d="M104 54 H50 C38 54 26 55 15 59 C25 67 38 72 52 72 H58 L62 82 V88 H50 V96 H98 V88 H86 V82 L92 72 H104 Z"/></clipPath>
+  </defs>
+  <rect x="0.75" y="0.75" width="126.5" height="126.5" rx="28" fill="url(#bfi-tile)" stroke="#2A313C" stroke-width="1.5"/>
+  <g transform="translate(3 6)">
+  <circle cx="68" cy="42" r="30" fill="url(#bfi-glow)"/>
+  <path d="M104 54 H50 C38 54 26 55 15 59 C25 67 38 72 52 72 H58 L62 82 V88 H50 V96 H98 V88 H86 V82 L92 72 H104 Z" fill="url(#bfi-steel)"/>
+  <rect x="14" y="54" width="94" height="3.2" fill="url(#bfi-ember)" clip-path="url(#bfi-clip)"/>
+  <rect x="63.5" y="35.5" width="9" height="9" rx="1.08" transform="rotate(45 68 40)" fill="url(#bfi-ember)" opacity="1.0"/>
+  <rect x="79.4" y="27.4" width="5.2" height="5.2" rx="0.62" transform="rotate(45 82 30)" fill="url(#bfi-ember)" opacity="0.85"/>
+  <rect x="52.9" y="28.9" width="4.2" height="4.2" rx="0.50" transform="rotate(45 55 31)" fill="url(#bfi-ember)" opacity="0.75"/>
+  <rect x="90.4" y="39.4" width="3.2" height="3.2" rx="0.38" transform="rotate(45 92 41)" fill="url(#bfi-ember)" opacity="0.6"/>
+  </g>
+</svg>
