@@ -1,4 +1,4 @@
-<!-- BinaryForge contact form. Plain HTML, browser validation only.
+/<!-- BinaryForge contact form. Plain HTML, browser validation only.
      OWNER: add your form endpoint in src/data/site.ts. Until then the
      form shows a notice instead of sending. No JavaScript validation. -->
 ---
@@ -84,16 +84,15 @@ const f = contact.form;
   .field input,
   .field textarea {
     width: 100%;
-    padding: 12px 14px;
+    padding: 16px 4px;
     font: inherit;
-    font-size: 1rem;
+    font-size: 1.0625rem;
     color: var(--text);
     background: var(--input-bg);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    transition:
-      border-color 150ms ease-out,
-      box-shadow 150ms ease-out;
+    border: 0;
+    border-bottom: 1px solid var(--border);
+    border-radius: 0;
+    transition: border-color 200ms ease-out;
   }
   .field textarea {
     resize: vertical;
@@ -109,11 +108,12 @@ const f = contact.form;
   .field textarea:hover {
     border-bottom-color: var(--muted);
   }
+  /* Clear accent focus ring on hairline inputs. */
   .field input:focus,
   .field textarea:focus {
     outline: none;
-    border-color: var(--accent);
-    box-shadow: 0 0 0 3px var(--ring-soft);
+    border-bottom-color: var(--accent);
+    box-shadow: 0 1px 0 0 var(--accent);
   }
   .form-submit {
     justify-self: start;
@@ -122,7 +122,7 @@ const f = contact.form;
   /* Shown while no endpoint is configured. */
   .form-idle {
     border: 1px solid var(--border);
-    border-radius: 12px;
+    border-radius: 20px;
     padding: 32px;
     gap: 16px;
     color: var(--muted);
