@@ -2,6 +2,13 @@
 
 Astro is a static site builder: you write components in `.astro` files and it outputs plain HTML and CSS. This site ships no JavaScript.
 
+## Requirements
+
+- Node.js 18 or newer and npm (Astro 4; verified on Node 24).
+- Nothing else to run it: static output, no adapter, no UI libraries, no JavaScript in the shipped page.
+- Before launch, fill the placeholders in `src/data/site.ts`: email, phone, location, social URLs, `formEndpoint`, `canonical` (plus `site:` in `astro.config.mjs`).
+- Design rules the code follows: single white light theme (tokens in `src/styles/variables.css`), Inter 400 + 600 only, one accent used sparingly, hairline dividers instead of decorated cards, no scroll animation, `prefers-reduced-motion` respected.
+
 ## Install and run
 
 ```bash
