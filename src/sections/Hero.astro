@@ -35,9 +35,13 @@ import { hero } from '../data/content';
     position: relative;
     display: flex;
     align-items: center;
-    min-height: 88svh; /* roughly the viewport height, room to breathe */
+    /* Roughly one viewport with room to breathe. 88vh first as the
+       fallback for browsers without svh. */
+    min-height: 88vh;
+    min-height: 88svh;
     margin-top: -76px; /* slide under the floating navbar: photo to the very top */
     padding: 196px 0 180px;
+    overflow: hidden; /* overflow: clip is preferred where supported */
     overflow: clip;
   }
   /* Photo backdrop, calmed by a flat page-tone wash for contrast. */
@@ -56,6 +60,9 @@ import { hero } from '../data/content';
     content: '';
     position: absolute;
     inset: 0;
+    /* 68% page-tone wash: literal value first (no color-mix support),
+       then the token calc so it tracks a theme color change. */
+    background: rgb(219 224 230 / 0.68);
     background: color-mix(in srgb, var(--bg) 68%, transparent);
   }
   .hero-inner {
@@ -79,7 +86,6 @@ import { hero } from '../data/content';
   }
   @media (max-width: 768px) {
     .hero {
-      min-height: 88svh;
       padding: 156px 0 120px;
     }
     .hero-actions {

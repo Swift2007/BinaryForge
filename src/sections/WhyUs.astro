@@ -23,18 +23,23 @@ import { whyUs } from '../data/content';
 </section>
 
 <style>
+  /* Same quiet label as the other sections (13px overline from the
+     base .eyebrow): with the statement reduced, a 28px label would
+     outweigh its own content. */
   .why .eyebrow {
-    margin-bottom: 32px;
-    font-size: clamp(1.25rem, 1.1rem + 1vw, 1.75rem); /* 20 -> 28px */
-    letter-spacing: 0.04em;
+    margin-bottom: 24px;
   }
+  /* Statement reduced to the page's supporting-text scale: the hero
+     lede is 18-20px and section intros are 17px, so a 34px paragraph
+     stood apart. 20-24px keeps it the section's focal point without
+     overpowering the rest. */
   .statement {
-    font-size: clamp(1.5rem, 1.2rem + 1.6vw, 2.125rem); /* 24 -> 34px */
-    line-height: 1.4;
-    letter-spacing: -0.015em;
+    font-size: clamp(1.25rem, 1.15rem + 0.5vw, 1.5rem); /* 20 -> 24px */
+    line-height: 1.45;
+    letter-spacing: -0.01em;
     font-weight: 400;
     color: var(--text);
-    max-width: 28ch;
+    max-width: 32ch;
     text-wrap: balance;
   }
   /* Three quiet columns separated by 1px hairlines. No icons. */

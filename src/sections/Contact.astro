@@ -18,8 +18,16 @@ import { contact } from '../data/content';
         <a class="detail-email" href={`mailto:${site.email}`}>
           {site.email}
         </a>
-        <span>{site.phone}</span>
-        <span>{site.location}</span>
+        {/* tel: so the number dials from phones and desktop call apps. */}
+        {site.phone && (
+          <a
+            class="detail-tel"
+            href={`tel:${site.phone.replace(/[^+\d]/g, '')}`}
+          >
+            {site.phone}
+          </a>
+        )}
+        {site.location && <span>{site.location}</span>}
       </address>
       <div>
         <ContactForm />
@@ -62,6 +70,7 @@ import { contact } from '../data/content';
     letter-spacing: -0.01em;
     color: var(--text);
     text-decoration: none;
+    justify-self: start; /* hover underline hugs the text, not the column */
     overflow-wrap: anywhere;
   }
   .detail-email:hover {
@@ -71,6 +80,18 @@ import { contact } from '../data/content';
   }
   .contact-details span {
     color: var(--muted);
+  }
+  .detail-tel {
+    justify-self: start;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 200ms ease-out;
+  }
+  .detail-tel:hover {
+    color: var(--text);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    text-decoration-color: var(--accent);
   }
   @media (max-width: 860px) {
     .contact-grid {

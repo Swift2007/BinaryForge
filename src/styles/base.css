@@ -54,7 +54,9 @@ svg {
 /* Sections breathe: one idea per screen. */
 .section {
   padding-block: 140px;
-  scroll-margin-top: 72px; /* offset for the sticky navbar */
+  /* 88px clears the floating navbar (12px offset + 64px bar), so a
+     heading never tucks underneath it after an anchor jump. */
+  scroll-margin-top: 88px;
 }
 @media (max-width: 768px) {
   .section {
@@ -124,10 +126,11 @@ h3 {
     background-color 200ms ease-out,
     color 200ms ease-out,
     border-color 200ms ease-out,
-    transform 200ms ease-out;
+    transform 100ms ease-out;
 }
+/* Press feedback at once (pointer-down), not on release. */
 .btn:active {
-  transform: translateY(1px);
+  transform: scale(0.98);
 }
 
 .btn-primary {
@@ -216,6 +219,25 @@ textarea {
   border: 0;
 }
 
+/* Skip link (html shell): parked above the viewport until keyboard
+   focus, then a visible navy pill so the first Tab stop is usable. */
+.skip-link {
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  z-index: 100;
+  padding: 12px 20px;
+  background: var(--accent);
+  color: var(--accent-ink);
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  transform: translateY(calc(-100% - 24px));
+}
+.skip-link:focus-visible {
+  transform: none;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -224,6 +246,7 @@ textarea {
   *::before,
   *::after {
     animation-duration: 0.01ms !important;
+    animation-delay: 0s !important; /* no invisible wait: content shows at once */
     transition-duration: 0.01ms !important;
   }
 }

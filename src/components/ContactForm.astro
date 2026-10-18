@@ -1,21 +1,52 @@
-<!-- BinaryForge contact form. Plain HTML, browser validation only.
-     OWNER: add your form endpoint in src/data/site.ts. Until then the
-     form shows a notice instead of sending. Field words live in
-     src/data/content.ts (contact.form). No JavaScript validation. -->
+<!-- BinaryForge contact form. Plain HTML, browser validation only,
+     no JavaScript: Web3Forms POSTs and redirects to /sent/.
+     OWNER: paste the Web3Forms access key in src/data/site.ts. Until
+     the key is set the form uses a mailto action, so Send opens the
+     visitor's email app with the message composed instead of posting
+     to nowhere. Field words live in src/data/content.ts
+     (contact.form). -->
 ---
 import { site } from '../data/site';
 import { contact } from '../data/content';
 
-const hasEndpoint = site.formEndpoint.length > 0;
+// The form posts to Web3Forms only when it is fully configured: the
+// endpoint plus the access key. Until then the mailto fallback keeps
+// Send working as something real instead of landing on an API error.
+const isReady = site.formEndpoint.length > 0 && site.accessKey.length > 0;
 const f = contact.form;
 ---
 
 <form
   class="form"
-  action={hasEndpoint ? site.formEndpoint : undefined}
+  action={isReady ? site.formEndpoint : `mailto:${site.email}`}
+  enctype={isReady ? undefined : 'text/plain'}
   method="POST"
   aria-label="Contact form"
 >
+  {isReady && (
+    <>
+      <input type="hidden" name="access_key" value={site.accessKey} />
+      <input
+        type="hidden"
+        name="subject"
+        value={`New message from the ${site.name} website`}
+      />
+      <input
+        type="hidden"
+        name="redirect"
+        value={`${site.canonical.replace(/\/$/, '')}/sent/`}
+      />
+    </>
+  )}
+  {/* Honeypot per the Web3Forms pattern: invisible and unfocusable,
+      but still submitted unchecked. Bots that fill it are dropped. */}
+  <input
+    type="checkbox"
+    name="botcheck"
+    hidden
+    tabindex="-1"
+    aria-hidden="true"
+  />
       <div class="field">
         <label class="sr-only" for="cf-first">
           {f.firstNameLabel}
@@ -88,8 +119,8 @@ const f = contact.form;
       </button>
     </form>
 {
-  /* Visible until the owner adds a form endpoint in site.ts. */
-  !hasEndpoint && (
+  /* Visible until the owner pastes the Web3Forms key in site.ts. */
+  !isReady && (
     <p class="form-note">
       {f.note}{' '}
       <a class="prose-link" href={`mailto:${site.email}`}>
@@ -128,22 +159,24 @@ const f = contact.form;
       border-color 150ms ease-out,
       box-shadow 150ms ease-out;
   }
+  /* 8px radius and 52px height match the button system, so fields and
+     the submit button read as one set of parts instead of a mix. */
   .field input {
-    height: 60px;
-    padding: 0 24px;
-    border-radius: 999px;
+    height: 52px;
+    padding: 0 16px;
+    border-radius: 8px;
   }
   .field textarea {
-    min-height: 150px;
-    padding: 20px 24px;
-    border-radius: 24px;
+    min-height: 140px;
+    padding: 16px;
+    border-radius: 8px;
     resize: vertical;
     line-height: 1.6;
   }
   .field input::placeholder,
   .field textarea::placeholder {
+    /* Full opacity: 0.8 lands near 4.4:1 on white, below AA. */
     color: var(--muted);
-    opacity: 0.8;
   }
   .field input:hover,
   .field textarea:hover {

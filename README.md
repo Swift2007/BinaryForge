@@ -6,8 +6,8 @@ Astro is a static site builder: you write components in `.astro` files and it ou
 
 - Node.js 18 or newer and npm (Astro 4; verified on Node 24).
 - Nothing else to run it: static output, no adapter, no UI libraries, no JavaScript in the shipped page.
-- Before launch, fill the placeholders in `src/data/site.ts`: email, phone, location, social URLs, `formEndpoint`, `canonical` (plus `site:` in `astro.config.mjs`).
-- Design rules the code follows: single light cool-grey theme (tokens in `src/styles/variables.css`), Inter 400 + 600 only, one navy accent used sparingly, hairline dividers instead of decorated cards, no scroll animation, `prefers-reduced-motion` respected.
+- Before launch, fill the placeholders in `src/data/site.ts`: email, phone, location, social URLs, `accessKey` (your Web3Forms key), `canonical` (plus `site:` in `astro.config.mjs`).
+- Design rules the code follows: single light cool-grey theme (tokens in `src/styles/variables.css`), Inter 400 + 600 only, one navy accent used sparingly, hairline dividers instead of decorated cards, restrained motion (hero load-in, section and footer scroll-settle, page cross-fades, menu fade-in; progressive CSS only, `prefers-reduced-motion` respected).
 
 ## Install and run
 
@@ -43,7 +43,7 @@ public/
 | Company info, email, phone, location, socials | `src/data/site.ts` |
 | Wording, story, principles, services | `src/data/content.ts` |
 | Colors (single light theme) | `src/styles/variables.css` (cool blue-grey palette) |
-| Contact form endpoint (Formspree / Web3Forms URL) | `src/data/site.ts` → `formEndpoint` |
+| Contact form backend (Web3Forms access key) | `src/data/site.ts` → `accessKey` |
 | Logo artwork | `public/binaryforge-logo-light.svg` (keep file name) |
 | Page title and SEO text | `src/layouts/BaseLayout.astro` |
 

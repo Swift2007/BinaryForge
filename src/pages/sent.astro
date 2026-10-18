@@ -1,0 +1,31 @@
+<!-- BinaryForge success page: where Web3Forms redirects after a sent
+     message (the redirect is wired in src/components/ContactForm).
+     OWNER: words come from src/data/content.ts (contact.form). -->
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Button from '../components/Button.astro';
+import { contact } from '../data/content';
+
+const { successTitle, successText } = contact.form;
+---
+
+<BaseLayout
+  title="BinaryForge | Message sent"
+  description={successText}
+>
+  <section class="section">
+    <div class="container sent">
+      <h1 class="h2">{successTitle}</h1>
+      <p class="body-copy">{successText}</p>
+      <Button href="/" label="Back to the site" />
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .sent {
+    display: grid;
+    gap: 16px;
+    max-width: 40ch;
+  }
+</style>

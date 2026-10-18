@@ -84,7 +84,7 @@ export const contact = {
     consent:
       'I consent to BinaryForge using the information in this form to reply to my message.',
     submit: 'Send message',
-    note: 'This form is not connected yet. Add your form endpoint in src/data/site.ts.',
+    note: 'This form is not connected yet. Sending opens your email app instead. Add your Web3Forms access key in src/data/site.ts to change that.',
     successTitle: 'Thanks. We got your message.',
     successText: 'We reply within two working days.',
   },

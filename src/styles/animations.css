@@ -1,8 +1,87 @@
-/* BinaryForge motion: minimal by design. Interactive elements use short
-   transitions defined alongside the components. No scroll animation:
-   content is simply present, which also respects prefers-reduced-motion. */
+/* BinaryForge motion: restrained and site-wide, one vocabulary.
+   1. Arrival: the hero photo settles and the headline rises on load.
+      The navbar is deliberately instant: chrome is the frame, not a
+      moving part. Nothing loops.
+   2. Page changes cross-fade; the shared navbar is named so the frame
+      stays put while the content changes.
+   3. Content blocks (sections, footer) settle in as they enter the
+      viewport, only where the browser supports CSS scroll-driven
+      animations (Chromium, Safari 26+; Firefox shows static content).
+      One simple animation range, no exotic timing combinations.
+   4. Everything honors prefers-reduced-motion. Interactive elements
+      use short transitions defined alongside their components. */
 
-/* Kept as a no-op so any remaining `reveal` classes render normally. */
-.reveal {
-  opacity: 1;
+/* Entrance keyframes: opacity and transform only (compositor-friendly),
+   plain ease-out, no overshoot. rise-in-sm doubles as the section
+   settle: one motion vocabulary across the site. */
+@keyframes hero-photo-in {
+  from {
+    opacity: 0;
+    transform: scale(1.03);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes rise-in-sm {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* The one deliberate moment: the hero arrives, the rest of the page
+   stays still until scrolled into. Elements start 80ms apart so they
+   read in order, and fill-mode "both" holds their start state during
+   the delays. */
+.hero-bg img {
+  animation: hero-photo-in 1200ms ease-out both;
+}
+.hero-title {
+  animation: rise-in 500ms ease-out 80ms both;
+}
+.hero-lede {
+  animation: rise-in-sm 500ms ease-out 160ms both;
+}
+.hero-actions {
+  animation: rise-in-sm 500ms ease-out 240ms both;
+}
+
+/* Page-to-page: the default cross-fade, no slide, no scale. One
+   navigation opt-in, no custom keyframes. */
+@view-transition {
+  navigation: auto;
+}
+.navbar {
+  view-transition-name: navbar;
+}
+
+/* Content settle-in: progress follows the scroll position itself, so
+   the 12px rise completes while the block enters the viewport and
+   reverses symmetrically on scroll-back. Sections and the footer use
+   it; blocks already in view on load show completed (fill both). */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .section,
+    .footer {
+      animation: rise-in-sm linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 40%;
+    }
+  }
 }

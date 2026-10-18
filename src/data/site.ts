@@ -21,10 +21,13 @@ export const site = {
     { label: 'X', href: 'https://x.com/' },
   ],
 
-  // TODO: create a free form endpoint at formspree.io or web3forms.com
-  // and paste it here, e.g. 'https://formspree.io/f/xyourid'.
-  // Until then the form shows a notice and does not send.
-  formEndpoint: '',
+  // Contact form backend (Web3Forms). The access key is a public token
+  // by design: Web3Forms restricts abuse through the allowed-domain
+  // list in its dashboard, so keep that set to the real domain.
+  // If the key is ever removed, the form falls back to a mailto action
+  // so sending always behaves like something real.
+  formEndpoint: 'https://api.web3forms.com/submit',
+  accessKey: 'eed9add9-2bf9-468c-8d11-661c54ea829a',
 
   nav: [
     { label: 'Why Us', href: '#why-us' },
