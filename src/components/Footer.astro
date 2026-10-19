@@ -38,7 +38,11 @@ import { services, footer } from '../data/content';
       <div class="footer-col">
         <h2 class="footer-heading">Contact</h2>
         <a href={`mailto:${site.email}`}>{site.email}</a>
-        <span>{site.phone}</span>
+        {site.phones.map((phone) => (
+          <a class="footer-tel" href={`tel:${phone.replace(/[^+\d]/g, '')}`}>
+            {phone}
+          </a>
+        ))}
         <span>{site.location}</span>
       </div>
 

@@ -1,29 +1,128 @@
-<!-- BinaryForge terms and conditions. PLACEHOLDER PAGE.
-     OWNER: replace every paragraph below with your real terms
-     (a lawyer should review them). Delete this comment when done. -->
+<!-- BinaryForge terms and conditions: plain terms matching how the
+     studio actually works. OWNER: have a lawyer review before launch;
+     project agreements always override this page. -->
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../data/site';
 ---
 
 <BaseLayout
   title="BinaryForge | Terms and Conditions"
-  description="BinaryForge terms and conditions."
+  description="The general terms for using the BinaryForge website and working with BinaryForge."
 >
   <section class="section">
     <div class="container legal">
       <h1 class="h2">Terms and Conditions</h1>
-      <!-- TODO (owner): replace with your real terms. -->
+      <p class="legal-meta">Last updated: 18 October 2026.</p>
+
+      <h2>About these terms</h2>
       <p class="body-copy">
-        These terms are a placeholder. They do not form a legal agreement.
+        These terms describe how this website works and the general
+        shape of working with BinaryForge. Every project runs on its
+        own written proposal or agreement, and where a proposal and
+        this page differ, the proposal wins.
       </p>
+
+      <h2>Who we are</h2>
       <p class="body-copy">
-        Describe what clients can expect: how projects start, how payment
-        works, and who owns the finished software.
+        BinaryForge is a small software team based in Malawi. We
+        design and build mobile apps, websites, web applications and
+        custom software.
       </p>
+
+      <h2>This website</h2>
       <p class="body-copy">
-        Add how either side can end an agreement and how disputes are
-        handled.
+        You are welcome to read these pages and contact us. The words,
+        design and images here belong to BinaryForge. The site is
+        provided as it is: we write it carefully, but nothing on it is
+        a contract, an offer, or professional advice.
       </p>
+
+      <h2>Starting a project</h2>
+      <p class="body-copy">
+        A project starts with a conversation, then a written proposal:
+        scope, price, payment schedule, timeline, and what counts as
+        done. Work begins when both sides agree in writing.
+      </p>
+
+      <h2>Quotes and payment</h2>
+      <p class="body-copy">
+        Prices are quoted per project, in the currency stated in the
+        proposal, and payment follows that proposal's schedule. Where
+        a payment falls overdue, we pause work after a written
+        reminder.
+      </p>
+
+      <h2>Deliverables and timelines</h2>
+      <p class="body-copy">
+        Dates in a proposal are good-faith estimates. Waiting on
+        content, feedback or third-party approvals moves the timeline,
+        and we tell you when that happens.
+      </p>
+
+      <h2>Revisions</h2>
+      <p class="body-copy">
+        The proposal states how many rounds of review and change are
+        included. Larger changes beyond that are quoted separately
+        before they begin.
+      </p>
+
+      <h2>Intellectual property</h2>
+      <p class="body-copy">
+        When a project is paid in full, you own the deliverables the
+        proposal lists: the designs, code and content made for you.
+        BinaryForge keeps its general tools, internal libraries and
+        know-how, and may reuse them on other work. You confirm that
+        any content you hand us, such as text, images or data, is
+        yours to use.
+      </p>
+
+      <h2>Third-party services</h2>
+      <p class="body-copy">
+        Projects normally use services such as hosting, app stores,
+        domains or form relays. Those services carry their own terms,
+        and your accounts, credentials and billing with them are yours
+        unless our proposal says we manage them for you.
+      </p>
+
+      <h2>Warranty and liability</h2>
+      <p class="body-copy">
+        We fix defects in delivered work within the support window of
+        the proposal. Our liability on a project is limited to the
+        fees you paid for that project. Neither side is liable to the
+        other for indirect loss, such as lost profit or lost data,
+        except where the law does not permit that limit.
+      </p>
+
+      <h2>Disputes and governing law</h2>
+      <p class="body-copy">
+        These terms and all projects follow the laws of the Republic
+        of Malawi. If something goes wrong, we start by resolving it
+        directly, and Malawian courts are the fallback.
+      </p>
+
+      <h2>Changes to these terms</h2>
+      <p class="body-copy">
+        We update this page as our practice changes and move the date
+        at the top. Agreements you sign keep the terms they were
+        signed with.
+      </p>
+
+      <h2>Contact</h2>
+      <p class="body-copy">
+        Email:
+        <a class="prose-link" href={`mailto:${site.email}`}>{site.email}</a>
+      </p>
+      {
+        site.phones.map((phone) => (
+          <p class="body-copy">
+            Phone:
+            <a class="prose-link" href={`tel:${phone.replace(/[^+\d]/g, '')}`}>
+              {phone}
+            </a>
+          </p>
+        ))
+      }
     </div>
   </section>
 </BaseLayout>
@@ -33,5 +132,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     display: grid;
     gap: 24px;
     max-width: 70ch;
+  }
+  /* Quiet section heads: the h1 carries the page scale. */
+  .legal h2 {
+    font-size: 1.125rem;
+  }
+  .legal-meta {
+    color: var(--muted);
+    font-size: 0.9375rem;
   }
 </style>

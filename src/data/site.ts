@@ -7,12 +7,13 @@ export const site = {
   name: 'BinaryForge',
   tagline: 'Where ideas are forged into software.',
 
-  // TODO: replace with the real contact email.
-  email: 'hello@binaryforge.example.com',
-  // TODO: replace with the real phone number, or delete the line.
-  phone: '+1 (555) 010-2030',
-  // TODO: replace with the real city / region.
-  location: 'Your city, your country',
+  // Real contact details: Malawi numbers, ProtonMail inbox. Numbers
+  // live in a list: both the contact section and the footer render
+  // every entry as a dialable link.
+  email: 'binaryforge265@protonmail.com',
+  phones: ['+265 990265044', '+265 994481263'],
+  // Studio remote for now: country-wide operation, no physical office.
+  location: 'Malawi',
 
   // TODO: replace with real profile URLs. Delete any you do not use.
   socials: [

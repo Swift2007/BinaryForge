@@ -18,15 +18,12 @@ import { contact } from '../data/content';
         <a class="detail-email" href={`mailto:${site.email}`}>
           {site.email}
         </a>
-        {/* tel: so the number dials from phones and desktop call apps. */}
-        {site.phone && (
-          <a
-            class="detail-tel"
-            href={`tel:${site.phone.replace(/[^+\d]/g, '')}`}
-          >
-            {site.phone}
+        {/* tel: so the numbers dial from phones and desktop call apps. */}
+        {site.phones.map((phone) => (
+          <a class="detail-tel" href={`tel:${phone.replace(/[^+\d]/g, '')}`}>
+            {phone}
           </a>
-        )}
+        ))}
         {site.location && <span>{site.location}</span>}
       </address>
       <div>

@@ -1,30 +1,111 @@
-<!-- BinaryForge privacy policy. PLACEHOLDER PAGE.
-     OWNER: replace every paragraph below with your real policy
-     (a lawyer should review it). Delete this comment when done. -->
+<!-- BinaryForge privacy policy: describes real practice, not promises.
+     OWNER: keep this in sync with actual behaviour of the site, and
+     have a lawyer review before launch. Contact details come from
+     src/data/site.ts, so edits there flow through here. -->
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../data/site';
 ---
 
 <BaseLayout
   title="BinaryForge | Privacy Policy"
-  description="BinaryForge privacy policy."
+  description="How BinaryForge handles the information you share through this website."
 >
   <section class="section">
     <div class="container legal">
       <h1 class="h2">Privacy Policy</h1>
-      <!-- TODO (owner): replace with your real policy. -->
+      <p class="legal-meta">Last updated: 18 October 2026.</p>
+
+      <h2>Who we are</h2>
       <p class="body-copy">
-        This policy is a placeholder. It does not describe real practices
-        yet.
+        BinaryForge is a small software team based in Malawi. This page
+        explains what happens to the information you share through this
+        website. If anything here is unclear, write to
+        <a class="prose-link" href={`mailto:${site.email}`}>{site.email}</a>.
+      </p>
+
+      <h2>What we collect</h2>
+      <p class="body-copy">
+        This site sets no cookies, runs no analytics and shows no
+        advertising. Nothing follows you while you read it.
       </p>
       <p class="body-copy">
-        Describe what contact details you collect through the contact form
-        and how you use them to reply.
+        The only personal information we receive is what you type into
+        the contact form: first name, surname, email address, phone
+        number, your message, and your consent for us to reply. Keep
+        that first message to what you would say in an opening email.
       </p>
+
+      <h2>How we use it</h2>
       <p class="body-copy">
-        Add how long you keep messages, who can see them, and how someone
-        can ask for their details to be removed.
+        We use these details for one purpose: to reply to you, answer
+        questions, quote projects and manage the work you hire us for.
+        We never add you to a marketing list, and we send no
+        newsletters.
       </p>
+
+      <h2>Where your message goes</h2>
+      <p class="body-copy">
+        The contact form sends your details through Web3Forms
+        (web3forms.com), a form relay service, into our Proton Mail
+        inbox, where we read and reply. Both services move data over
+        encrypted connections, operate outside Malawi and publish
+        their own privacy policies, which govern the part they handle.
+      </p>
+
+      <h2>How long we keep it</h2>
+      <p class="body-copy">
+        Your message stays in our inbox while the conversation is
+        useful, and old enquiries are cleaned up from time to time.
+        When you ask for deletion, we delete. Any records Web3Forms
+        keeps on its side follow its own terms.
+      </p>
+
+      <h2>Who else sees it</h2>
+      <p class="body-copy">
+        We do not sell your details and we do not share them beyond
+        the services named above. If a project starts, the providers
+        that project needs, such as a host or an app store, are agreed
+        with you as part of that project.
+      </p>
+
+      <h2>Your rights</h2>
+      <p class="body-copy">
+        You can ask for a copy, a correction or the deletion of what
+        we hold, at any time, at
+        <a class="prose-link" href={`mailto:${site.email}`}>{site.email}</a>.
+        We act on requests within a reasonable time.
+      </p>
+
+      <h2>The law</h2>
+      <p class="body-copy">
+        Malawian law applies to the personal data we process, including
+        the Data Protection Act, 2024. This page is our plain-language
+        summary of how we handle your details.
+      </p>
+
+      <h2>Changes</h2>
+      <p class="body-copy">
+        When our practice changes, this page changes with it and the
+        date at the top moves. The live page is always the current
+        policy.
+      </p>
+
+      <h2>Contact</h2>
+      <p class="body-copy">
+        Email:
+        <a class="prose-link" href={`mailto:${site.email}`}>{site.email}</a>
+      </p>
+      {
+        site.phones.map((phone) => (
+          <p class="body-copy">
+            Phone:
+            <a class="prose-link" href={`tel:${phone.replace(/[^+\d]/g, '')}`}>
+              {phone}
+            </a>
+          </p>
+        ))
+      }
     </div>
   </section>
 </BaseLayout>
@@ -34,5 +115,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     display: grid;
     gap: 24px;
     max-width: 70ch;
+  }
+  /* Quiet section heads: the h1 carries the page scale. */
+  .legal h2 {
+    font-size: 1.125rem;
+  }
+  .legal-meta {
+    color: var(--muted);
+    font-size: 0.9375rem;
   }
 </style>
