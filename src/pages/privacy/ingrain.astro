@@ -1,0 +1,171 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { site } from '../../data/site';
+---
+
+<BaseLayout
+  title="HitaruJP | Privacy Policy"
+  description="How the HitaruJP Japanese language app handles your personal data."
+>
+  <section class="section">
+    <div class="container legal">
+      <h1 class="h2">Privacy Policy</h1>
+      <p class="legal-meta">Last updated: October 25, 2026.</p>
+
+      <p class="body-copy">
+        This Privacy Policy explains how the developer of HitaruJP ("the
+        Developer", "we", "us", "our") collects, uses, stores, shares and protects
+        your personal information when you use the HitaruJP Service. It should be
+        read together with the Terms of Service, which govern your use of the
+        app. We apply the data protection principles of Malawi's Data
+        Protection Act and similar laws, and GDPR-style principles where they
+        apply to users in the European Union or European Economic Area.
+      </p>
+
+      <h2>Information we collect</h2>
+      <p class="body-copy">
+        We collect the following personal information when you use HitaruJP:
+      </p>
+      <ul>
+        <li>
+          Account information: your HitaruJP user ID, the email address you
+          signed up with, and - when you sign in with Google - your Google
+          account identifiers.
+        </li>
+        <li>
+          Profile information: your display name, avatar, JLPT level, interests,
+          and your subscription tier.
+        </li>
+        <li>
+          Learning data: vocabulary, flashcards, review sessions, kana marks,
+          saved sentences, activity days and visit counts, and watch history of
+          catalogue videos.
+        </li>
+        <li>
+          AI data: counts of AI explanations requested, tokens used and estimated
+          cost.
+        </li>
+        <li>
+          Device and technical information: device identifiers, operating system
+          and version, app version, IP address, and diagnostics.
+        </li>
+      </ul>
+      <p class="body-copy">
+        The backend API does not store email addresses; it stores the data listed
+        above against your user record. We do not knowingly collect precise GPS
+        location or payment information.
+      </p>
+
+      <h2>How we use your information</h2>
+      <p class="body-copy">
+        We use your information to create and authenticate your account, deliver
+        the learning content and recommendations, run your flashcards and
+        progress tracking, provide AI explanations, and understand how the Service
+        is used so we can improve it.
+      </p>
+
+      <h2>Legal bases for our use</h2>
+      <p class="body-copy">
+        We process personal data on the basis of consent (for example when you
+        sign up and accept the Terms), the performance of a contract with you, our
+        legitimate interests in operating and securing the Service, and legal
+        obligations. We apply data protection principles - lawfulness and
+        legitimacy of processing, purpose limitation, data minimisation, accuracy,
+        storage limitation, integrity and confidentiality.
+      </p>
+
+      <h2>How we share information</h2>
+      <p class="body-copy">
+        We do not sell your personal information. We share it only with the
+        service providers that help us run the Service - including Google
+        Firebase for authentication and storage, YouTube for videos and
+        transcripts, and the AI provider for explanations - and with other users
+        where your content is shared. We may also disclose information where
+        required by law or to protect the rights and safety of people.
+      </p>
+
+      <h2>Retention and deletion</h2>
+      <p class="body-copy">
+        We keep your account information and learning data for as long as your
+        account is active and needed to provide the Service. You can delete saved
+        content and progress from within the app, and you may request deletion of
+        your account and data by contacting the Developer. When you delete your
+        account, we delete or deactivate the associated personal data, subject to
+        any retention obligations under applicable law.
+      </p>
+
+      <h2>Security</h2>
+      <p class="body-copy">
+        We use reasonable technical and organisational measures - including
+        encryption in transit and access controls - to protect your information.
+        No method of transmission or storage is completely secure, and we cannot
+        guarantee absolute security.
+      </p>
+
+      <h2>Your rights</h2>
+      <p class="body-copy">
+        Depending on where you live, you may have rights to access, correct, delete,
+        export or object to the processing of your personal data, and to withdraw
+        consent. These rights may be provided directly by the data protection law
+        that applies to you - including the GDPR for users in the European Union
+        or European Economic Area, and Malawi's Data Protection Act. To
+        exercise them, contact the Developer through the Serafim GitHub repository.
+      </p>
+
+      <h2>Children's privacy</h2>
+      <p class="body-copy">
+        HitaruJP is not directed at children below the minimum age described in
+        the Terms of Service. We do not knowingly collect personal information
+        from children. If we learn that we have collected it, we will delete it.
+      </p>
+
+      <h2>International transfers</h2>
+      <p class="body-copy">
+        Your information may be processed in Malawi and by service providers that
+        may be located outside Malawi, including in other countries. Where data
+        crosses borders, we rely on appropriate safeguards.
+      </p>
+
+      <h2>Changes and contact</h2>
+      <p class="body-copy">
+        We may update this Privacy Policy. The current version is always available
+        in the app and is marked with a date. Your continued use of the Service
+        after a change takes effect means you accept the updated Policy. Questions
+        about this Policy can be sent to the Developer through the Serafim GitHub
+        repository.
+      </p>
+
+      <h2>Contact</h2>
+      <p class="body-copy">
+        Email:
+        <a class="prose-link" href={`mailto:${site.email}`}>{site.email}</a>
+      </p>
+      {
+        site.phones.map((phone) => (
+          <p class="body-copy">
+            Phone:
+            <a class="prose-link" href={`tel:${phone.replace(/[^+\d]/g, '')}`}>
+              {phone}
+            </a>
+          </p>
+        ))
+      }
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .legal {
+    display: grid;
+    gap: 24px;
+    max-width: 70ch;
+  }
+  /* Quiet section heads: the h1 carries the page scale. */
+  .legal h2 {
+    font-size: 1.125rem;
+  }
+  .legal-meta {
+    color: var(--muted);
+    font-size: 0.9375rem;
+  }
+</style>
