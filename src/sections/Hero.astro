@@ -35,10 +35,13 @@ import { hero } from '../data/content';
     position: relative;
     display: flex;
     align-items: center;
-    /* Roughly one viewport with room to breathe. 88vh first as the
+    /* Full first screen: the photo runs from above the top edge (under
+       the floating navbar) to the exact bottom edge of the viewport, so
+       no bare background shows before the first scroll. The 12px matches
+       the navbar offset that the -76px margin consumes. vh first as the
        fallback for browsers without svh. */
-    min-height: 88vh;
-    min-height: 88svh;
+    min-height: calc(100vh + 12px);
+    min-height: calc(100svh + 12px);
     margin-top: -76px; /* slide under the floating navbar: photo to the very top */
     padding: 196px 0 180px;
     overflow: hidden; /* overflow: clip is preferred where supported */

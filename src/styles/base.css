@@ -199,16 +199,15 @@ input,
 textarea {
   caret-color: var(--accent);
 }
+/* Hidden scrollbar: the full-bleed photo runs edge to edge with no
+   strip at the right. Scrolling is unaffected (wheel, touch, keys,
+   anchor links). WebKit/Blink rule plus the standard property for
+   Firefox and Chrome 121+. */
+html {
+  scrollbar-width: none;
+}
 ::-webkit-scrollbar {
-  width: 12px;
-}
-::-webkit-scrollbar-track {
-  background: var(--bg);
-}
-::-webkit-scrollbar-thumb {
-  background: var(--border);
-  border-radius: 8px;
-  border: 3px solid var(--bg);
+  display: none;
 }
 
 /* Screen-reader-only helper. */

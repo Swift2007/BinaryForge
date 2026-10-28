@@ -33,9 +33,11 @@
   --focus-ring: #1a3d63;
   --ring-soft: rgb(26 61 99 / 0.16);
 
-  /* Chrome. The navbar fill is the glass tint; the sheen, hairline
-     and highlight live in the Navbar component on top of it. */
-  --nav-bg: rgb(255 255 255 / 0.5);
+  /* Chrome. The navbar fill is a thin glass tint: low opacity on
+     purpose, so the blurred photo shows through and the glass reads.
+     The sheen, hairline and highlights live in the Navbar component
+     on top of it. */
+  --nav-bg: rgb(255 255 255 / 0.16);
   --bar-shadow: rgb(10 25 49 / 0.08);
   --selection-bg: rgb(74 127 167 / 0.28);
 
