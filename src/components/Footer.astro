@@ -1,8 +1,8 @@
-<!-- BinaryForge footer: contained dark card with link columns and a
+<!-- HAUTEK footer: contained ink card with link columns and a
      giant cropped wordmark. OWNER: links come from src/data/site.ts
      (nav, contact, socials) and src/data/content.ts (services, footer). -->
 ---
-import Logo from './Logo.astro';
+import Brand from './Brand.astro';
 import { site } from '../data/site';
 import { services, footer } from '../data/content';
 ---
@@ -11,8 +11,8 @@ import { services, footer } from '../data/content';
   <div class="footer-card">
     <div class="footer-top">
       <div class="footer-brand">
-        <a href="#top" aria-label="BinaryForge home">
-          <Logo tone="dark" />
+        <a href="#top" aria-label={`${site.name} home`}>
+          <Brand />
         </a>
         <p>{footer.note}</p>
       </div>
@@ -68,7 +68,7 @@ import { services, footer } from '../data/content';
     </div>
 
     <div class="footer-wordmark" aria-hidden="true">
-      <p class="wordmark">BinaryForge</p>
+      <p class="wordmark">{site.name}</p>
     </div>
   </div>
 </footer>
@@ -96,6 +96,7 @@ import { services, footer } from '../data/content';
     display: grid;
     gap: 16px;
     justify-items: start;
+    color: var(--on-dark); /* the wordmark inherits this */
   }
   .footer-brand p {
     color: var(--on-dark-muted);
@@ -171,9 +172,10 @@ import { services, footer } from '../data/content';
     justify-content: center;
   }
   .wordmark {
+    font-family: var(--font-display);
     font-size: clamp(3.5rem, 12.5vw, 12rem);
     font-weight: 600;
-    letter-spacing: -0.04em;
+    letter-spacing: -0.02em;
     line-height: 1.15;
     text-align: center;
     white-space: nowrap;

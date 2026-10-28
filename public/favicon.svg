@@ -1,1 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect x="2" y="2" width="28" height="28" rx="8" fill="#0A1931"/><g stroke="#B3CFE5" stroke-width="2" fill="none" stroke-linecap="round"><path d="M10 12h12M10 16h12M10 20h7"/></g></svg>
+<!-- HAUTEK favicon: minimal ink-navy H mark on transparent. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <path
+    fill="#0a1931"
+    d="M7 4h4.4v10.2h9.2V4H25v24h-4.4V17.8h-9.2V28H7Z"
+  />
+</svg>

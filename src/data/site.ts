@@ -1,15 +1,17 @@
-// BinaryForge company facts.
+// HAUTEK company facts.
 // OWNER: edit these values. They appear in the navbar, contact
 // section and footer. Anything marked TODO is a placeholder you
 // need to replace with real information.
 
 export const site = {
-  name: 'BinaryForge',
-  tagline: 'Where ideas are forged into software.',
+  name: 'HAUTEK',
+  tagline: 'Software built to last.',
 
   // Real contact details: Malawi numbers, ProtonMail inbox. Numbers
   // live in a list: both the contact section and the footer render
   // every entry as a dialable link.
+  // TODO: this inbox still carries the old brand name. Swap in a
+  // HAUTEK address once the new mailbox exists.
   email: 'binaryforge265@protonmail.com',
   phones: ['+265 990265044', '+265 994481263'],
   // Studio remote for now: country-wide operation, no physical office.
@@ -31,8 +33,9 @@ export const site = {
   accessKey: 'eed9add9-2bf9-468c-8d11-661c54ea829a',
 
   nav: [
-    { label: 'Why Us', href: '#why-us' },
     { label: 'Services', href: '#services' },
+    { label: 'Process', href: '#process' },
+    { label: 'FAQ', href: '#faq' },
     { label: 'Contact', href: '#contact' },
   ],
 

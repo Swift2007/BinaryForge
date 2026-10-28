@@ -1,0 +1,94 @@
+<!-- HAUTEK process: four numbered steps with hairline dividers.
+     OWNER: edit steps in src/data/content.ts (process). -->
+---
+import { process } from '../data/content';
+---
+
+<section id="process" class="section process" aria-labelledby="process-heading">
+  <div class="container">
+    <p class="eyebrow">{process.eyebrow}</p>
+    <h2 id="process-heading" class="h2">{process.heading}</h2>
+    <p class="body-copy">{process.intro}</p>
+
+    <ol class="step-list">
+      {
+        process.steps.map((s) => (
+          <li class="step">
+            <span class="step-index" aria-hidden="true">
+              {s.index}
+            </span>
+            <h3>{s.title}</h3>
+            <p>{s.text}</p>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>
+
+<style>
+  .process .eyebrow {
+    margin-bottom: 24px;
+  }
+  .process .h2 {
+    margin-bottom: 16px;
+  }
+  .process .body-copy {
+    margin-bottom: 64px;
+  }
+  /* Four quiet columns under one hairline, like the principles. */
+  .step-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border-top: 1px solid var(--border);
+  }
+  .step {
+    padding: 32px 24px 8px 0;
+  }
+  .step + .step {
+    border-left: 1px solid var(--border);
+    padding-left: 24px;
+  }
+  .step-index {
+    display: block;
+    font-size: 0.875rem;
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.04em;
+    margin-bottom: 16px;
+  }
+  .step h3 {
+    font-size: 1.25rem;
+    margin-bottom: 12px;
+  }
+  .step p {
+    color: var(--muted);
+    font-size: 1rem;
+    line-height: 1.6;
+    max-width: 28ch;
+  }
+  @media (max-width: 1024px) {
+    .step-list {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .step + .step {
+      border-left: 1px solid var(--border);
+    }
+  }
+  @media (max-width: 768px) {
+    .step-list {
+      grid-template-columns: 1fr;
+    }
+    .step {
+      padding: 32px 0;
+    }
+    .step + .step {
+      border-left: 0;
+      border-top: 1px solid var(--border);
+      padding-left: 0;
+    }
+  }
+</style>

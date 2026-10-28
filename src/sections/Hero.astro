@@ -1,4 +1,4 @@
-<!-- BinaryForge hero: tagline, one sentence, two actions.
+<!-- HAUTEK hero: photo backdrop, headline, one sentence, two actions.
      OWNER: all words come from src/data/content.ts (hero). -->
 ---
 import Button from '../components/Button.astro';
@@ -44,7 +44,11 @@ import { hero } from '../data/content';
     overflow: hidden; /* overflow: clip is preferred where supported */
     overflow: clip;
   }
-  /* Photo backdrop, calmed by a flat page-tone wash for contrast. */
+  /* Photo backdrop. A light asymmetric wash: stronger at the left edge
+     where the headline sits, almost bare on the right, so the photo's
+     teal sky stays vivid while ink type keeps its contrast. Both
+     gradients declare literal values first (no color-mix support),
+     then the token calc so it tracks a theme change. */
   .hero-bg {
     position: absolute;
     inset: 0;
@@ -60,10 +64,26 @@ import { hero } from '../data/content';
     content: '';
     position: absolute;
     inset: 0;
-    /* 68% page-tone wash: literal value first (no color-mix support),
-       then the token calc so it tracks a theme color change. */
-    background: rgb(219 224 230 / 0.68);
-    background: color-mix(in srgb, var(--bg) 68%, transparent);
+    background: linear-gradient(
+      90deg,
+      rgb(246 247 249 / 0.55) 0%,
+      rgb(246 247 249 / 0.28) 45%,
+      rgb(246 247 249 / 0.16) 100%
+    );
+    background: linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--bg) 55%, transparent) 0%,
+      color-mix(in srgb, var(--bg) 28%, transparent) 45%,
+      color-mix(in srgb, var(--bg) 16%, transparent) 100%
+    );
+  }
+  @media (max-width: 768px) {
+    /* Text spans the full width on small screens, so even the wash
+       out evenly instead of leaving dark photo behind the words. */
+    .hero-bg::after {
+      background: rgb(246 247 249 / 0.5);
+      background: color-mix(in srgb, var(--bg) 50%, transparent);
+    }
   }
   .hero-inner {
     position: relative;

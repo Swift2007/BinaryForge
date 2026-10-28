@@ -1,24 +1,48 @@
-/* BinaryForge design tokens. Single light theme: very light cool grey,
-   flat with no gradients. Palette: ink navy, steel blue, pale blue.
-   Owner: safe to edit. Change colors here and the whole site follows.
-   Accent (deep navy) is used sparingly: buttons, focus ring, details. */
+/* HAUTEK design tokens. Single light theme, editorial minimal:
+   near-white cool grey, hairline borders, no shadows. The accent is
+   the deep navy from the original palette, used sparingly: buttons,
+   focus ring, details. The hero photo is the one rich element;
+   everything else stays flat so it reads as intentional.
+   Owner: safe to edit. Change colors or fonts here and the whole
+   site follows. */
 :root {
   color-scheme: light;
-  --bg: #dbe0e6;
-  --bg-alt: #ccd2d9;
+
+  /* Type. Fraunces for display/headlines and the wordmark; Inter for
+     body and UI. Both self-hosted via @fontsource (see base.css). */
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    system-ui, sans-serif;
+  --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
+
+  /* Page tones: very light cool grey so the navy family sits true. */
+  --bg: #f6f7f9;
+  --bg-alt: #eef1f4;
   --surface: #ffffff;
-  --border: #b9c9d8;
+  --border: #dde3e9;
+
+  /* Ink navy. Muted clears 4.5:1 on the page tone for body text. */
   --text: #0a1931;
   --muted: #3d5a76;
+  --heading: #0a1931;
+
+  /* The one accent: deep navy. Buttons and focus are navy with white
+     ink; hover drops to the darker ink navy. */
   --accent: #1a3d63;
   --accent-hover: #0a1931;
-  --accent-ink: #ffffff; /* white text on the navy button */
-  --nav-bg: rgb(255 255 255 / 0.45);
-  --bar-shadow: rgb(10 25 49 / 0.08);
+  --accent-ink: #ffffff;
   --focus-ring: #1a3d63;
   --ring-soft: rgb(26 61 99 / 0.16);
+
+  /* Chrome. The navbar fill is the glass tint; the sheen, hairline
+     and highlight live in the Navbar component on top of it. */
+  --nav-bg: rgb(255 255 255 / 0.5);
+  --bar-shadow: rgb(10 25 49 / 0.08);
   --selection-bg: rgb(74 127 167 / 0.28);
+
+  /* Form fields. */
   --input-bg: #ffffff;
+
+  /* Footer: a flat ink-navy card, as before. */
   --card: #0a1931;
   --on-dark: #ffffff;
   --on-dark-muted: #b3cfe5;
