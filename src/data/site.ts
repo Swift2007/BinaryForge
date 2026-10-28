@@ -10,19 +10,15 @@ export const site = {
   // Real contact details: Malawi numbers, ProtonMail inbox. Numbers
   // live in a list: both the contact section and the footer render
   // every entry as a dialable link.
-  // TODO: this inbox still carries the old brand name. Swap in a
-  // HAUTEK address once the new mailbox exists.
-  email: 'binaryforge265@protonmail.com',
+  email: 'hautek265@protonmail.com',
   phones: ['+265 990265044', '+265 994481263'],
   // Studio remote for now: country-wide operation, no physical office.
   location: 'Malawi',
 
-  // TODO: replace with real profile URLs. Delete any you do not use.
-  socials: [
-    { label: 'GitHub', href: 'https://github.com/' },
-    { label: 'LinkedIn', href: 'https://www.linkedin.com/' },
-    { label: 'X', href: 'https://x.com/' },
-  ],
+  // Real profile URLs only. The footer shows its Social column when
+  // this list has entries, and hides it when the list is empty.
+  // TODO(owner): add profiles (GitHub, LinkedIn, ...) as they exist.
+  socials: [] as { label: string; href: string }[],
 
   // Contact form backend (Web3Forms). The access key is a public token
   // by design: Web3Forms restricts abuse through the allowed-domain
@@ -40,6 +36,8 @@ export const site = {
     { label: 'Contact', href: '#contact' },
   ],
 
-  // TODO: replace with the real public URL of this site.
-  canonical: 'https://binaryforge.example.com/',
+  // TODO(owner): replace with the real public URL of this site. The
+  // contact form builds its post-submit redirect from this value, so
+  // it must be set before deploying.
+  canonical: 'https://hautek.example.com/',
 };

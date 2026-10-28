@@ -41,28 +41,33 @@ export const services = {
     'Four things, done well. If your project fits one of these, we can help.',
   items: [
     {
+      // The id doubles as a deep-link anchor for the footer's Services column.
+      id: 'mobile-apps',
       index: '01',
       title: 'Mobile Apps',
       text: 'iOS and Android apps, from first sketch to the app stores.',
     },
     {
+      id: 'websites',
       index: '02',
       title: 'Websites',
       text: 'Fast, clear websites that say what you do and win trust.',
     },
     {
+      id: 'web-applications',
       index: '03',
       title: 'Web Applications',
       text: 'Tools your team and customers use every day, in the browser.',
     },
     {
+      id: 'custom-software',
       index: '04',
       title: 'Custom Software',
       text: 'Systems shaped around how your business already works.',
     },
   ],
-  // Every service row links here.
-  itemCta: { label: 'Start a project', href: '#contact' },
+  // One call to action for the whole section, closing the list.
+  cta: { label: 'Start a project', href: '#contact' },
 };
 
 export const work = {
@@ -71,14 +76,12 @@ export const work = {
   intro: 'A few things we have shipped. Open a project to see its details.',
   items: [
     {
-      index: '01',
       title: 'Serafim',
       text: 'A social app for communities: posts, reactions and real-time chat.',
       href: '/terms/serafim',
       cta: 'Project details',
     },
     {
-      index: '02',
       title: 'HitaruJP',
       text: 'A Japanese language app with curated videos matched to your level.',
       href: '/terms/hitarujp',
