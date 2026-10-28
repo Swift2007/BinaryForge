@@ -68,21 +68,36 @@ import { hero } from '../data/content';
       90deg,
       rgb(246 247 249 / 0.55) 0%,
       rgb(246 247 249 / 0.28) 45%,
-      rgb(246 247 249 / 0.16) 100%
+      rgb(246 247 249 / 0.12) 100%
     );
     background: linear-gradient(
       90deg,
       color-mix(in srgb, var(--bg) 55%, transparent) 0%,
       color-mix(in srgb, var(--bg) 28%, transparent) 45%,
-      color-mix(in srgb, var(--bg) 16%, transparent) 100%
+      color-mix(in srgb, var(--bg) 12%, transparent) 100%
     );
   }
   @media (max-width: 768px) {
-    /* Text spans the full width on small screens, so even the wash
-       out evenly instead of leaving dark photo behind the words. */
+    /* Portrait crop: the photo's top half is pale concrete that reads
+       as blank under a wash, so the frame shifts down to the skylight
+       and the wash runs top to bottom instead: solid enough behind the
+       headline, nearly bare at the bottom so the teal reads. */
+    .hero-bg img {
+      object-position: 50% 78%;
+    }
     .hero-bg::after {
-      background: rgb(246 247 249 / 0.5);
-      background: color-mix(in srgb, var(--bg) 50%, transparent);
+      background: linear-gradient(
+        180deg,
+        rgb(246 247 249 / 0.6) 0%,
+        rgb(246 247 249 / 0.3) 55%,
+        rgb(246 247 249 / 0.1) 100%
+      );
+      background: linear-gradient(
+        180deg,
+        color-mix(in srgb, var(--bg) 60%, transparent) 0%,
+        color-mix(in srgb, var(--bg) 30%, transparent) 55%,
+        color-mix(in srgb, var(--bg) 10%, transparent) 100%
+      );
     }
   }
   .hero-inner {

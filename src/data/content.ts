@@ -65,6 +65,28 @@ export const services = {
   itemCta: { label: 'Start a project', href: '#contact' },
 };
 
+export const work = {
+  eyebrow: 'Work',
+  heading: 'Recent projects',
+  intro: 'A few things we have shipped. Open a project to see its details.',
+  items: [
+    {
+      index: '01',
+      title: 'Serafim',
+      text: 'A social app for communities: posts, reactions and real-time chat.',
+      href: '/terms/serafim',
+      cta: 'Project details',
+    },
+    {
+      index: '02',
+      title: 'HitaruJP',
+      text: 'A Japanese language app with curated videos matched to your level.',
+      href: '/terms/hitarujp',
+      cta: 'Project details',
+    },
+  ],
+};
+
 export const process = {
   eyebrow: 'Process',
   heading: 'How we work',
