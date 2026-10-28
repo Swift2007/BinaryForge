@@ -1,11 +1,14 @@
-/* BinaryForge base styles: reset, typography, layout, buttons, focus.
+/* HAUTEK base styles: reset, typography, layout, buttons, focus.
    Owner: type and spacing live here. Colors live in variables.css. */
 
-/* Self-hosted Inter via @fontsource (woff2 copied at build time).
-   Fallback is metric-matched so swapping causes no layout shift.
-   Two weights only: 400 + 600. */
+/* Self-hosted fonts via @fontsource (woff2 copied at build time).
+   Inter 400 + 600 for body and UI; Fraunces 500 + 600 for headlines
+   and the wordmark. Fallbacks are metric-safe so a swap causes no
+   layout shift. */
 @import '@fontsource/inter/400.css';
 @import '@fontsource/inter/600.css';
+@import '@fontsource/fraunces/500.css';
+@import '@fontsource/fraunces/600.css';
 
 *,
 *::before,
@@ -25,8 +28,7 @@ html {
 body {
   background: var(--bg);
   color: var(--text);
-  font-family:
-    'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  font-family: var(--font-sans);
   font-size: 1.0625rem; /* 17px */
   line-height: 1.6;
   font-weight: 400;
@@ -64,20 +66,22 @@ svg {
   }
 }
 
-/* Type scale. Headlines: tight, confident, under 8 words. */
+/* Type scale. Headlines set in the display serif: tight, confident,
+   under 8 words. */
 h1,
 h2,
 h3 {
+  font-family: var(--font-display);
   font-weight: 600;
   line-height: 1.08;
-  letter-spacing: -0.025em;
+  letter-spacing: -0.01em;
   text-wrap: balance;
 }
 
 .display {
   font-size: clamp(2.75rem, 2rem + 4.5vw, 5.5rem); /* 44px -> 88px */
   line-height: 1.05;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.015em;
 }
 
 .h2 {
@@ -106,7 +110,8 @@ h3 {
   color: var(--muted);
 }
 
-/* Buttons: same height (52px) and subtle radius (8px) everywhere. */
+/* Buttons: full pill, same height (52px) everywhere. Navy fill,
+   white ink; nothing else. */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -114,7 +119,7 @@ h3 {
   gap: 8px;
   min-height: 52px;
   padding: 0 28px;
-  border-radius: 8px;
+  border-radius: 9999px;
   font-family: inherit;
   font-size: 1rem;
   font-weight: 600;
@@ -194,16 +199,15 @@ input,
 textarea {
   caret-color: var(--accent);
 }
+/* Hidden scrollbar: the full-bleed photo runs edge to edge with no
+   strip at the right. Scrolling is unaffected (wheel, touch, keys,
+   anchor links). WebKit/Blink rule plus the standard property for
+   Firefox and Chrome 121+. */
+html {
+  scrollbar-width: none;
+}
 ::-webkit-scrollbar {
-  width: 12px;
-}
-::-webkit-scrollbar-track {
-  background: var(--bg);
-}
-::-webkit-scrollbar-thumb {
-  background: var(--border);
-  border-radius: 8px;
-  border: 3px solid var(--bg);
+  display: none;
 }
 
 /* Screen-reader-only helper. */

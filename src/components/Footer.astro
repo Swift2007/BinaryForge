@@ -1,8 +1,8 @@
-<!-- BinaryForge footer: contained dark card with link columns and a
+<!-- HAUTEK footer: contained ink card with link columns and a
      giant cropped wordmark. OWNER: links come from src/data/site.ts
      (nav, contact, socials) and src/data/content.ts (services, footer). -->
 ---
-import Logo from './Logo.astro';
+import Brand from './Brand.astro';
 import { site } from '../data/site';
 import { services, footer } from '../data/content';
 ---
@@ -11,8 +11,8 @@ import { services, footer } from '../data/content';
   <div class="footer-card">
     <div class="footer-top">
       <div class="footer-brand">
-        <a href="#top" aria-label="BinaryForge home">
-          <Logo tone="dark" />
+        <a href="#top" aria-label={`${site.name} home`}>
+          <Brand />
         </a>
         <p>{footer.note}</p>
       </div>
@@ -21,7 +21,7 @@ import { services, footer } from '../data/content';
         <h2 class="footer-heading">Services</h2>
         {
           services.items.map((s) => (
-            <a href="#services">{s.title}</a>
+            <a href={`#${s.id}`}>{s.title}</a>
           ))
         }
       </nav>
@@ -46,16 +46,20 @@ import { services, footer } from '../data/content';
         <span>{site.location}</span>
       </div>
 
-      <nav class="footer-col" aria-label="Social">
-        <h2 class="footer-heading">Social</h2>
-        {
-          site.socials.map((s) => (
-            <a href={s.href} rel="noopener noreferrer">
-              {s.label}
-            </a>
-          ))
-        }
-      </nav>
+      {
+        /* Rendered only once real profile URLs exist in site.ts, so the
+           footer never shows links that go nowhere. */
+        site.socials.length > 0 && (
+          <nav class="footer-col" aria-label="Social">
+            <h2 class="footer-heading">Social</h2>
+            {site.socials.map((s) => (
+              <a href={s.href} rel="noopener noreferrer">
+                {s.label}
+              </a>
+            ))}
+          </nav>
+        )
+      }
     </div>
 
     <div class="footer-base">
@@ -68,7 +72,7 @@ import { services, footer } from '../data/content';
     </div>
 
     <div class="footer-wordmark" aria-hidden="true">
-      <p class="wordmark">BinaryForge</p>
+      <p class="wordmark">{site.name}</p>
     </div>
   </div>
 </footer>
@@ -86,9 +90,11 @@ import { services, footer } from '../data/content';
     background: var(--card);
     border-radius: 24px;
   }
+  /* Brand column, then one track per link group. If the Social column
+     returns (see site.ts), add a track back here. */
   .footer-top {
     display: grid;
-    grid-template-columns: 1.4fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1.4fr 1fr 1fr 1fr;
     gap: 48px;
     align-items: start;
   }
@@ -96,6 +102,7 @@ import { services, footer } from '../data/content';
     display: grid;
     gap: 16px;
     justify-items: start;
+    color: var(--on-dark); /* the wordmark inherits this */
   }
   .footer-brand p {
     color: var(--on-dark-muted);
@@ -171,9 +178,10 @@ import { services, footer } from '../data/content';
     justify-content: center;
   }
   .wordmark {
+    font-family: var(--font-display);
     font-size: clamp(3.5rem, 12.5vw, 12rem);
     font-weight: 600;
-    letter-spacing: -0.04em;
+    letter-spacing: -0.02em;
     line-height: 1.15;
     text-align: center;
     white-space: nowrap;

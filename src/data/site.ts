@@ -1,26 +1,24 @@
-// BinaryForge company facts.
+// HAUTEK company facts.
 // OWNER: edit these values. They appear in the navbar, contact
 // section and footer. Anything marked TODO is a placeholder you
 // need to replace with real information.
 
 export const site = {
-  name: 'BinaryForge',
-  tagline: 'Where ideas are forged into software.',
+  name: 'HAUTEK',
+  tagline: 'Software built to last.',
 
   // Real contact details: Malawi numbers, ProtonMail inbox. Numbers
   // live in a list: both the contact section and the footer render
   // every entry as a dialable link.
-  email: 'binaryforge265@protonmail.com',
+  email: 'hautek265@protonmail.com',
   phones: ['+265 990265044', '+265 994481263'],
   // Studio remote for now: country-wide operation, no physical office.
   location: 'Malawi',
 
-  // TODO: replace with real profile URLs. Delete any you do not use.
-  socials: [
-    { label: 'GitHub', href: 'https://github.com/' },
-    { label: 'LinkedIn', href: 'https://www.linkedin.com/' },
-    { label: 'X', href: 'https://x.com/' },
-  ],
+  // Real profile URLs only. The footer shows its Social column when
+  // this list has entries, and hides it when the list is empty.
+  // TODO(owner): add profiles (GitHub, LinkedIn, ...) as they exist.
+  socials: [] as { label: string; href: string }[],
 
   // Contact form backend (Web3Forms). The access key is a public token
   // by design: Web3Forms restricts abuse through the allowed-domain
@@ -31,11 +29,15 @@ export const site = {
   accessKey: 'eed9add9-2bf9-468c-8d11-661c54ea829a',
 
   nav: [
-    { label: 'Why Us', href: '#why-us' },
     { label: 'Services', href: '#services' },
+    { label: 'Work', href: '#work' },
+    { label: 'Process', href: '#process' },
+    { label: 'FAQ', href: '#faq' },
     { label: 'Contact', href: '#contact' },
   ],
 
-  // TODO: replace with the real public URL of this site.
-  canonical: 'https://binaryforge.example.com/',
+  // TODO(owner): replace with the real public URL of this site. The
+  // contact form builds its post-submit redirect from this value, so
+  // it must be set before deploying.
+  canonical: 'https://hautek.example.com/',
 };

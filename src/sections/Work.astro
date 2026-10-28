@@ -1,0 +1,102 @@
+<!-- HAUTEK work: selected projects, one row each, linking to the
+     project pages. OWNER: edit entries in src/data/content.ts (work). -->
+---
+import { work } from '../data/content';
+---
+
+<section id="work" class="section work" aria-labelledby="work-heading">
+  <div class="container">
+    <p class="eyebrow">{work.eyebrow}</p>
+    <h2 id="work-heading" class="h2">{work.heading}</h2>
+    <p class="body-copy">{work.intro}</p>
+
+    <ul class="work-list">
+      {
+        work.items.map((w) => (
+          <li class="work-item">
+            <h3 class="work-title">{w.title}</h3>
+            <div class="work-body">
+              <p>{w.text}</p>
+              <a
+                class="work-link"
+                href={w.href}
+                aria-label={`${w.cta}: ${w.title}`}
+              >
+                <span class="work-link-text">{w.cta}</span>
+                <span class="arrow" aria-hidden="true">
+                  &rarr;
+                </span>
+              </a>
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  .work .eyebrow {
+    margin-bottom: 24px;
+  }
+  .work .h2 {
+    margin-bottom: 16px;
+  }
+  .work .body-copy {
+    margin-bottom: 64px;
+  }
+  .work-list {
+    list-style: none;
+    padding: 0;
+    border-top: 1px solid var(--border);
+  }
+  /* Record grammar, distinct from the numbered services list: the
+     project name leads on the left, the story and its link follow on
+     the right. */
+  .work-item {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 24px 48px;
+    align-items: start;
+    padding-block: 40px;
+    border-bottom: 1px solid var(--border);
+  }
+  .work-title {
+    font-size: clamp(1.375rem, 1.2rem + 0.7vw, 1.75rem);
+    line-height: 1.15;
+  }
+  .work-body p {
+    color: var(--muted);
+    font-size: 1rem;
+    max-width: 52ch;
+    margin-bottom: 16px;
+  }
+  .work-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--muted);
+    font-size: 0.9375rem;
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: color 200ms ease-out;
+  }
+  .work-link .arrow {
+    transition: transform 200ms ease-out;
+  }
+  .work-link:hover {
+    color: var(--text);
+  }
+  .work-link:hover .arrow {
+    transform: translateX(4px);
+    color: var(--accent);
+  }
+  @media (max-width: 768px) {
+    .work-item {
+      grid-template-columns: 1fr;
+      gap: 12px;
+      padding-block: 32px;
+    }
+  }
+</style>

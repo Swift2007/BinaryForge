@@ -1,4 +1,4 @@
-<!-- BinaryForge base layout: html shell, SEO and global CSS.
+<!-- HAUTEK base layout: html shell, SEO and global CSS.
      OWNER: edit the SEO text only if the company description changes.
      Single light theme: no theme script, no flash possible. -->
 ---
@@ -14,8 +14,8 @@ interface Props {
   description?: string;
 }
 const {
-  title = 'BinaryForge | Software Solutions',
-  description = 'BinaryForge is a small software team building mobile apps, websites, web applications and custom software. Where ideas are forged into software.',
+  title = 'HAUTEK | Software built to last',
+  description = 'HAUTEK is a small software startup in Malawi building mobile apps, websites, web applications and custom software. Software built to last.',
 } = Astro.props;
 ---
 
@@ -30,7 +30,7 @@ const {
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="BinaryForge" />
+    <meta property="og:site_name" content="HAUTEK" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={site.canonical} />
@@ -41,7 +41,7 @@ const {
       content={`${site.canonical.replace(/\/$/, '')}/hero-bg.jpg`}
     />
 
-    <meta name="theme-color" content="#DBE0E6" />
+    <meta name="theme-color" content="#F6F7F9" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <!-- Inter is self-hosted and bundled from @fontsource at build time
          (see src/styles/base.css), so no render-blocking font requests. -->

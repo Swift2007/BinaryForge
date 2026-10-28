@@ -1,5 +1,5 @@
 {
-  "name": "binaryforge-website",
+  "name": "hautek-website",
   "type": "module",
   "version": "1.0.0",
   "private": true,
@@ -9,6 +9,7 @@
     "preview": "astro preview"
   },
   "dependencies": {
+    "@fontsource/fraunces": "^5.3.0",
     "@fontsource/inter": "^5.1.0",
     "astro": "^4.16.18"
   },

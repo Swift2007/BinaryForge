@@ -1,0 +1,23 @@
+<!-- HAUTEK brand: plain text wordmark, shown everywhere the brand
+     appears. It inherits its color from the parent, so the navbar
+     shows it in ink and the footer card in paper. OWNER: to swap in a
+     real logo later, replace the <span> with an <img> in this one
+     file; every surface (navbar, footer) updates automatically. -->
+---
+import { site } from '../data/site';
+---
+
+<span class="brand">{site.name}</span>
+
+<style>
+  .brand {
+    display: inline-block;
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    line-height: 1.2;
+    color: currentColor;
+    white-space: nowrap;
+  }
+</style>

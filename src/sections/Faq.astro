@@ -1,0 +1,109 @@
+<!-- HAUTEK FAQ: native details/summary accordion. HTML and CSS only,
+     keyboard accessible, no JavaScript. OWNER: edit questions in
+     src/data/content.ts (faq). -->
+---
+import { faq } from '../data/content';
+---
+
+<section id="faq" class="section faq" aria-labelledby="faq-heading">
+  <div class="container">
+    <p class="eyebrow">{faq.eyebrow}</p>
+    <h2 id="faq-heading" class="h2">{faq.heading}</h2>
+    <p class="body-copy">{faq.intro}</p>
+
+    <div class="faq-list">
+      {
+        faq.items.map((item) => (
+          <details class="faq-item">
+            <summary>
+              <span class="faq-question">{item.question}</span>
+              <span class="faq-icon" aria-hidden="true" />
+            </summary>
+            <p class="faq-answer">{item.answer}</p>
+          </details>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .faq .eyebrow {
+    margin-bottom: 24px;
+  }
+  .faq .h2 {
+    margin-bottom: 16px;
+  }
+  .faq .body-copy {
+    margin-bottom: 64px;
+  }
+  .faq-list {
+    border-top: 1px solid var(--border);
+  }
+  /* One hairline between items, none doubled up. */
+  .faq-item {
+    border-bottom: 1px solid var(--border);
+  }
+  .faq-item summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding-block: 24px;
+    cursor: pointer;
+    list-style: none;
+    color: var(--text);
+  }
+  .faq-item summary::-webkit-details-marker {
+    display: none;
+  }
+  .faq-question {
+    font-size: 1.0625rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+  /* Plus icon drawn in CSS: the bar rotates on open, turning + into −. */
+  .faq-icon {
+    position: relative;
+    flex: none;
+    width: 16px;
+    height: 16px;
+    color: var(--muted);
+  }
+  .faq-icon::before,
+  .faq-icon::after {
+    content: '';
+    position: absolute;
+    background: currentColor;
+    transition: transform 200ms ease-out;
+  }
+  .faq-icon::before {
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 1.5px;
+    transform: translateX(-50%);
+  }
+  .faq-icon::after {
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1.5px;
+    transform: translateY(-50%);
+  }
+  .faq-item[open] .faq-icon::before {
+    transform: translateX(-50%) rotate(90deg);
+  }
+  .faq-answer {
+    color: var(--muted);
+    font-size: 1rem;
+    line-height: 1.6;
+    max-width: 60ch;
+    padding: 0 40px 24px 0;
+  }
+  @media (max-width: 768px) {
+    .faq-answer {
+      padding-right: 16px;
+    }
+  }
+</style>
