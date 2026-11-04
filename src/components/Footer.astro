@@ -175,9 +175,19 @@ import { services, footer } from '../data/content';
   .footer-legal a:hover {
     color: var(--on-dark);
   }
+  /* Focus ring scoped to the card: the global ring is --focus-ring
+     (logo blue #0d3b66), which is 1.53:1 on this ink background and
+     effectively invisible to keyboard users. White keeps the global
+     2px/3px-offset geometry and reads at 17.55:1 here. */
+  .footer-card :where(a):focus-visible {
+    outline-color: var(--on-dark);
+  }
   /* Giant wordmark cropped by the card edge, fading as it goes. Same
      fade as before, now applied as a mask so it works on the PNG logo
-     (transparent background; cream mark on the ink card). */
+     (transparent background; cream mark on the ink card). Width follows
+     the card, not a fixed floor: a hard 320px minimum used to overflow
+     the card at narrow or zoomed viewports, and the card's overflow
+     rule clipped it. */
   .footer-wordmark {
     margin-top: 40px;
     padding-bottom: 40px;
@@ -186,7 +196,7 @@ import { services, footer } from '../data/content';
     justify-content: center;
   }
   .wordmark {
-    width: clamp(320px, 48vw, 600px);
+    width: min(100%, 600px);
     height: auto;
     margin-bottom: 0;
     -webkit-mask-image: linear-gradient(
