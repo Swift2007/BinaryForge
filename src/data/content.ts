@@ -74,17 +74,28 @@ export const work = {
   eyebrow: 'Work',
   heading: 'Recent projects',
   intro: 'A few things we have shipped. Open a project to see its details.',
+  // The slug drives the project page (/projects/<slug>) built by
+  // src/pages/projects/[slug].astro. `about` is a brief explainer
+  // sourced from each project's Privacy Policy; the card href must
+  // match the slug, and each project's documents live at
+  // /terms/<slug> and /privacy/<slug>.
   items: [
     {
+      slug: 'serafim',
       title: 'Serafim',
       text: 'A social app for communities: posts, reactions and real-time chat.',
-      href: '/terms/serafim',
+      about:
+        'Serafim is a social app for communities. You sign in with email or Google, build a profile with your display name, bio and interests, and add friends. Posts, comments and reactions called sparks fill your feed, and groups and circles organise your people. Real-time chat keeps the conversation going, with backups you can save to Google Drive. The app collects no precise location, and you can delete your account and data when you leave.',
+      href: '/projects/serafim',
       cta: 'Project details',
     },
     {
+      slug: 'hitarujp',
       title: 'HitaruJP',
       text: 'A Japanese language app with curated videos matched to your level.',
-      href: '/terms/hitarujp',
+      about:
+        'HitaruJP is a Japanese language app built around curated videos. You set your JLPT level, and the app recommends videos that fit it. Watch with transcripts on YouTube, save sentences, and grow vocabulary and flashcards through review sessions. AI explanations break down what you are reading. Progress tracks your activity days, and the backend stores no email addresses.',
+      href: '/projects/hitarujp',
       cta: 'Project details',
     },
   ],

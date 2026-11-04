@@ -28,12 +28,15 @@ export const site = {
   formEndpoint: 'https://api.web3forms.com/submit',
   accessKey: 'eed9add9-2bf9-468c-8d11-661c54ea829a',
 
+  // Nav anchors are "/#…" (not bare "#…") so they resolve from every
+  // page: the navbar and footer also render on sub-pages (projects,
+  // terms, privacy, sent), where a bare anchor has no target.
   nav: [
-    { label: 'Services', href: '#services' },
-    { label: 'Work', href: '#work' },
-    { label: 'Process', href: '#process' },
-    { label: 'FAQ', href: '#faq' },
-    { label: 'Contact', href: '#contact' },
+    { label: 'Services', href: '/#services' },
+    { label: 'Work', href: '/#work' },
+    { label: 'Process', href: '/#process' },
+    { label: 'FAQ', href: '/#faq' },
+    { label: 'Contact', href: '/#contact' },
   ],
 
   // TODO(owner): replace with the real public URL of this site. The

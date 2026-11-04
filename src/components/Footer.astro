@@ -11,7 +11,7 @@ import { services, footer } from '../data/content';
   <div class="footer-card">
     <div class="footer-top">
       <div class="footer-brand">
-        <a href="#top" aria-label={`${site.name} home`}>
+        <a href="/#top" aria-label={`${site.name} home`}>
           <Brand variant="light" />
         </a>
         <p>{footer.note}</p>
@@ -21,7 +21,7 @@ import { services, footer } from '../data/content';
         <h2 class="footer-heading">Services</h2>
         {
           services.items.map((s) => (
-            <a href={`#${s.id}`}>{s.title}</a>
+            <a href={`/#${s.id}`}>{s.title}</a>
           ))
         }
       </nav>

@@ -1,0 +1,87 @@
+<!-- HAUTEK project page: one static page per entry in content.ts
+     (work). This is the destination for the "Recent projects" cards.
+     OWNER: project copy lives in src/data/content.ts (work). Legal
+     documents must exist at /terms/<slug> and /privacy/<slug>. -->
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { work } from '../../data/content';
+
+export function getStaticPaths() {
+  return work.items.map((item) => ({ params: { slug: item.slug } }));
+}
+
+const item = work.items.find((w) => w.slug === Astro.params.slug);
+if (!item) {
+  return new Response(null, { status: 404 });
+}
+---
+
+<BaseLayout title={`${item.title} | HAUTEK project`} description={item.text}>
+  <section class="section">
+    <div class="container">
+      <p class="eyebrow">{work.eyebrow}</p>
+      <h1 class="h2">{item.title}</h1>
+      <p class="body-copy">{item.text}</p>
+      <p class="body-copy about">{item.about}</p>
+
+      <hr class="rule" />
+
+      <h2 class="docs-heading">Documents</h2>
+      <ul class="docs">
+        <li>
+          <a href={`/terms/${item.slug}/`}>Terms and Conditions</a>
+        </li>
+        <li>
+          <a href={`/privacy/${item.slug}/`}>Privacy Policy</a>
+        </li>
+      </ul>
+
+      <a class="back" href="/#work">&larr; Back to all projects</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .rule {
+    border: 0;
+    border-top: 1px solid var(--border);
+    margin-block: 40px;
+  }
+  .about {
+    color: var(--muted);
+  }
+  .docs-heading {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 12px;
+  }
+  .docs {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    gap: 8px;
+  }
+  .docs a {
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    font-weight: 600;
+  }
+  .docs a:hover {
+    color: var(--accent-hover);
+  }
+  .back {
+    display: inline-block;
+    margin-top: 48px;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.9375rem;
+    transition: color 200ms ease-out;
+  }
+  .back:hover {
+    color: var(--text);
+  }
+</style>
