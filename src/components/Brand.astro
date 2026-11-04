@@ -1,23 +1,28 @@
-<!-- HAUTEK brand: plain text wordmark, shown everywhere the brand
-     appears. It inherits its color from the parent, so the navbar
-     shows it in ink and the footer card in paper. OWNER: to swap in a
-     real logo later, replace the <span> with an <img> in this one
-     file; every surface (navbar, footer) updates automatically. -->
+<!-- HAUTEK brand: the real logo, shown everywhere the brand appears.
+     `variant="dark"` serves the navy logo on light surfaces (navbar);
+     `variant="light"` serves the cream logo on dark surfaces (footer).
+     The logo files carry transparent backgrounds, and the surrounding
+     <a> already holds the accessible name (aria-label), so the images
+     stay decorative (alt=""). OWNER: to rebrand, replace the PNGs in
+     /public; every surface (navbar, footer) updates from this one
+     component. -->
 ---
-import { site } from '../data/site';
+interface Props {
+  variant?: 'dark' | 'light';
+}
+const { variant = 'dark' } = Astro.props;
+const src =
+  variant === 'light' ? '/hautek-logo-white.png' : '/hautek-logo.png';
 ---
 
-<span class="brand">{site.name}</span>
+<img class="brand" src={src} alt="" width="1000" height="300" />
 
 <style>
   .brand {
+    /* 24px reads at the same visual weight as the former 1.25rem
+       text wordmark (the mark fills ~60% of the file's height). */
     display: inline-block;
-    font-family: var(--font-display);
-    font-size: 1.25rem;
-    font-weight: 600;
-    letter-spacing: 0.04em;
-    line-height: 1.2;
-    color: currentColor;
-    white-space: nowrap;
+    height: 24px;
+    width: auto;
   }
 </style>

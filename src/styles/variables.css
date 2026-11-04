@@ -8,8 +8,8 @@
 :root {
   color-scheme: light;
 
-  /* Type. Fraunces for display/headlines and the wordmark; Inter for
-     body and UI. Both self-hosted via @fontsource (see base.css). */
+  /* Type. Fraunces for display/headlines; Inter for body and UI.
+     Both self-hosted via @fontsource (see base.css). */
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI',
     system-ui, sans-serif;
   --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
@@ -25,13 +25,14 @@
   --muted: #3d5a76;
   --heading: #0a1931;
 
-  /* The one accent: deep navy. Buttons and focus are navy with white
-     ink; hover drops to the darker ink navy. */
-  --accent: #1a3d63;
+  /* The one accent: the logo's blue (the A in the HAUTEK wordmark).
+     Buttons and focus are blue with white ink; hover drops to the
+     darker ink navy. */
+  --accent: #0d3b66;
   --accent-hover: #0a1931;
   --accent-ink: #ffffff;
-  --focus-ring: #1a3d63;
-  --ring-soft: rgb(26 61 99 / 0.16);
+  --focus-ring: #0d3b66;
+  --ring-soft: rgb(13 59 102 / 0.16);
 
   /* Chrome. The navbar fill is a thin glass tint: low opacity on
      purpose, so the blurred photo shows through and the glass reads.

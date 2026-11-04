@@ -20,7 +20,6 @@ npm run preview  # preview the built site
 
 ## Folder tree
 
-```
 src/
   layouts/BaseLayout.astro   # html shell, SEO, navbar + footer (single light theme)
   pages/index.astro          # assembles Hero, WhyUs, Services, Process, FAQ, Contact
@@ -33,7 +32,6 @@ src/
 public/
   hero-bg.jpg (hero backdrop, optimized ~120KB),
   favicon.svg (minimal H mark; keep the file name when swapping artwork)
-```
 
 ## How do I change…?
 
