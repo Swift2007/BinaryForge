@@ -34,7 +34,13 @@ body {
   font-weight: 400;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  /* Scroll container hygiene: a body that carries a hidden overflow axis
+     becomes a hidden scroll context under the sticky navbar and has been
+     associated with intermittent wheel-scroll stalls in Chromium. clip
+     cuts the overflow without creating a scroll container at all; hidden
+     stays as the fallback for older engines, same pattern as the hero. */
   overflow-x: hidden;
+  overflow-x: clip;
   transition: background-color 200ms ease-out, color 200ms ease-out;
 }
 
