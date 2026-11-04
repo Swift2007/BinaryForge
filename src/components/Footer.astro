@@ -11,8 +11,8 @@ import { services, footer } from '../data/content';
   <div class="footer-card">
     <div class="footer-top">
       <div class="footer-brand">
-        <a href="#top" aria-label={`${site.name} home`}>
-          <Brand />
+        <a href="/#top" aria-label={`${site.name} home`}>
+          <Brand variant="light" />
         </a>
         <p>{footer.note}</p>
       </div>
@@ -21,7 +21,7 @@ import { services, footer } from '../data/content';
         <h2 class="footer-heading">Services</h2>
         {
           services.items.map((s) => (
-            <a href={`#${s.id}`}>{s.title}</a>
+            <a href={`/#${s.id}`}>{s.title}</a>
           ))
         }
       </nav>
@@ -72,7 +72,13 @@ import { services, footer } from '../data/content';
     </div>
 
     <div class="footer-wordmark" aria-hidden="true">
-      <p class="wordmark">{site.name}</p>
+      <img
+        class="wordmark"
+        src="/hautek-logo-white.png"
+        alt=""
+        width="1000"
+        height="300"
+      />
     </div>
   </div>
 </footer>
@@ -169,7 +175,19 @@ import { services, footer } from '../data/content';
   .footer-legal a:hover {
     color: var(--on-dark);
   }
-  /* Giant wordmark cropped by the card edge, fading as it goes. */
+  /* Focus ring scoped to the card: the global ring is --focus-ring
+     (logo blue #0d3b66), which is 1.53:1 on this ink background and
+     effectively invisible to keyboard users. White keeps the global
+     2px/3px-offset geometry and reads at 17.55:1 here. */
+  .footer-card :where(a):focus-visible {
+    outline-color: var(--on-dark);
+  }
+  /* Giant wordmark cropped by the card edge, fading as it goes. Same
+     fade as before, now applied as a mask so it works on the PNG logo
+     (transparent background; cream mark on the ink card). Width follows
+     the card, not a fixed floor: a hard 320px minimum used to overflow
+     the card at narrow or zoomed viewports, and the card's overflow
+     rule clipped it. */
   .footer-wordmark {
     margin-top: 40px;
     padding-bottom: 40px;
@@ -178,22 +196,19 @@ import { services, footer } from '../data/content';
     justify-content: center;
   }
   .wordmark {
-    font-family: var(--font-display);
-    font-size: clamp(3.5rem, 12.5vw, 12rem);
-    font-weight: 600;
-    letter-spacing: -0.02em;
-    line-height: 1.15;
-    text-align: center;
-    white-space: nowrap;
+    width: min(100%, 600px);
+    height: auto;
     margin-bottom: 0;
-    background: linear-gradient(
+    -webkit-mask-image: linear-gradient(
       180deg,
-      var(--on-dark) 40%,
-      rgb(255 255 255 / 0.05)
+      rgb(0 0 0) 40%,
+      rgb(0 0 0 / 0.05)
     );
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+    mask-image: linear-gradient(
+      180deg,
+      rgb(0 0 0) 40%,
+      rgb(0 0 0 / 0.05)
+    );
   }
   @media (max-width: 1024px) {
     .footer-top {
