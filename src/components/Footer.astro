@@ -201,12 +201,9 @@ import whatsappLogo from '../assets/icons/whatsapp.svg?raw';
   .footer-card :where(a):focus-visible {
     outline-color: var(--on-dark);
   }
-  /* Giant wordmark cropped by the card edge, fading as it goes. Same
-     fade as before, now applied as a mask so it works on the PNG logo
-     (transparent background; cream mark on the ink card). Width follows
-     the card, not a fixed floor: a hard 320px minimum used to overflow
-     the card at narrow or zoomed viewports, and the card's overflow
-     rule clipped it. */
+  /* Giant wordmark cropped by the card edge, fading as it goes.
+     The mask was removed because mask-image forces recompositing on
+     every paint during scroll, causing jank on long pages. */
   .footer-wordmark {
     margin-top: 40px;
     padding-bottom: 40px;
@@ -218,16 +215,7 @@ import whatsappLogo from '../assets/icons/whatsapp.svg?raw';
     width: min(100%, 600px);
     height: auto;
     margin-bottom: 0;
-    -webkit-mask-image: linear-gradient(
-      180deg,
-      rgb(0 0 0) 40%,
-      rgb(0 0 0 / 0.05)
-    );
-    mask-image: linear-gradient(
-      180deg,
-      rgb(0 0 0) 40%,
-      rgb(0 0 0 / 0.05)
-    );
+    will-change: transform;
   }
   @media (max-width: 1024px) {
     .footer-top {
