@@ -10,8 +10,8 @@ export const site = {
   // Real contact details: Malawi numbers, ProtonMail inbox. Numbers
   // live in a list: both the contact section and the footer render
   // every entry as a dialable link.
-  email: 'hautek265@protonmail.com',
-  phones: ['+265 990265044', '+265 994481263'],
+  email: 'hautek265@outlook.com',
+  phones: ['+265 981 174 427'],
   // Studio remote for now: country-wide operation, no physical office.
   location: 'Malawi',
 
