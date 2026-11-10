@@ -69,15 +69,15 @@ import { hero } from '../data/content';
     /* Desktop: asymmetric wash, stronger behind the headline. */
     background: linear-gradient(
       90deg,
-      rgb(246 247 249 / 0.6) 0%,
-      rgb(246 247 249 / 0.32) 42%,
-      rgb(246 247 249 / 0.14) 100%
+      rgb(246 247 249 / 0.46) 0%,
+      rgb(246 247 249 / 0.22) 42%,
+      rgb(246 247 249 / 0.08) 100%
     );
     background: linear-gradient(
       90deg,
-      color-mix(in srgb, var(--bg) 60%, transparent) 0%,
-      color-mix(in srgb, var(--bg) 32%, transparent) 42%,
-      color-mix(in srgb, var(--bg) 14%, transparent) 100%
+      color-mix(in srgb, var(--bg) 46%, transparent) 0%,
+      color-mix(in srgb, var(--bg) 22%, transparent) 42%,
+      color-mix(in srgb, var(--bg) 8%, transparent) 100%
     );
   }
   .hero-inner {
@@ -103,8 +103,8 @@ import { hero } from '../data/content';
   @media (max-width: 768px) {
     .hero {
       min-height: calc(100svh + 12px);
-      padding: 132px 0 88px;
-      align-items: flex-end;
+      padding: 112px 0 72px;
+      align-items: flex-start;
     }
     .hero-inner {
       gap: 20px;
@@ -129,29 +129,29 @@ import { hero } from '../data/content';
       width: 100%;
       min-height: 44px;
     }
-    /* Mobile: apply the hero splash treatment with a stronger, more even
-       wash so text remains readable over the photo at any crop. */
+    /* Mobile: a lighter splash wash to keep the photo visible while
+       preserving readable contrast behind the content. */
     .hero-bg::after {
       background: linear-gradient(
         180deg,
-        rgb(246 247 249 / 0.88) 0%,
-        rgb(246 247 249 / 0.72) 34%,
-        rgb(246 247 249 / 0.46) 68%,
-        rgb(246 247 249 / 0.24) 100%
+        rgb(246 247 249 / 0.68) 0%,
+        rgb(246 247 249 / 0.46) 36%,
+        rgb(246 247 249 / 0.24) 70%,
+        rgb(246 247 249 / 0.12) 100%
       );
       background: linear-gradient(
         180deg,
-        color-mix(in srgb, var(--bg) 88%, transparent) 0%,
-        color-mix(in srgb, var(--bg) 72%, transparent) 34%,
-        color-mix(in srgb, var(--bg) 46%, transparent) 68%,
-        color-mix(in srgb, var(--bg) 24%, transparent) 100%
+        color-mix(in srgb, var(--bg) 68%, transparent) 0%,
+        color-mix(in srgb, var(--bg) 46%, transparent) 36%,
+        color-mix(in srgb, var(--bg) 24%, transparent) 70%,
+        color-mix(in srgb, var(--bg) 12%, transparent) 100%
       );
     }
   }
 
   @media (max-width: 480px) {
     .hero {
-      padding: 124px 0 72px;
+      padding: 104px 0 64px;
     }
     .hero-title {
       max-width: 10ch;
