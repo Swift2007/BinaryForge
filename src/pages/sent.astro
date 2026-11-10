@@ -1,6 +1,7 @@
 <!-- HAUTEK success page: where Web3Forms redirects after a sent
      message (the redirect is wired in src/components/ContactForm).
-     OWNER: words come from src/data/content.ts (contact.form). -->
+     Shows the confirmation as a pop (toast) notification instead of
+     plain static text. Words come from src/data/content.ts (contact.form). -->
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Button from '../components/Button.astro';
@@ -15,17 +16,137 @@ const { successTitle, successText } = contact.form;
 >
   <section class="section">
     <div class="container sent">
-      <h1 class="h2">{successTitle}</h1>
-      <p class="body-copy">{successText}</p>
+      <!-- Pop / toast confirmation notification -->
+      <div
+        class="toast"
+        role="status"
+        aria-live="polite"
+        aria-modal="true"
+      >
+        <div class="toast-icon" aria-hidden="true">✓</div>
+        <div class="toast-body">
+          <h3 class="toast-title">{successTitle}</h3>
+          <p class="toast-message">{successText}</p>
+        </div>
+        <button class="toast-close" aria-label="Dismiss notification">×</button>
+      </div>
       <Button href="/" label="Back to the site" />
     </div>
   </section>
 </BaseLayout>
 
+<script>
+  /* Auto-dismiss the pop notification after 6 seconds. */
+  const toast = document.querySelector('.toast');
+  const dismiss = () => {
+    if (!toast) return;
+    toast.style.opacity = '0';
+    toast.style.transform = 'translate(-50%, -24px)';
+    setTimeout(() => toast.remove(), 300);
+  };
+  if (toast) {
+    setTimeout(dismiss, 6000);
+    const close = toast.querySelector('.toast-close');
+    if (close) {
+      close.addEventListener('click', dismiss);
+    }
+  }
+</script>
+
 <style>
   .sent {
     display: grid;
-    gap: 16px;
+    gap: 24px;
     max-width: 40ch;
+  }
+
+  /* Pop notification: fixed, top-centre, slides down into view. */
+  .toast {
+    position: fixed;
+    top: 24px;
+    left: 50%;
+    transform: translate(-50%, -24px);
+    opacity: 0;
+    animation: toastIn 400ms ease-out forwards;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 20px;
+    background: var(--surface);
+    border: 1px solid var(--border-strong);
+    border-left: 4px solid var(--accent);
+    border-radius: 12px;
+    box-shadow: 0 10px 25px -5px rgb(10 25 49 / 0.08),
+      0 8px 10px -6px rgb(10 25 49 / 0.03);
+    color: var(--text);
+    font-size: 0.95rem;
+    line-height: 1.5;
+    z-index: 100;
+    max-width: 92vw;
+    width: 420px;
+  }
+
+  .toast-icon {
+    width: 26px;
+    height: 26px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: var(--accent);
+    color: var(--accent-ink);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.1rem;
+    line-height: 1;
+  }
+
+  .toast-body {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .toast-title {
+    margin: 0 0 4px 0;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .toast-message {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--muted);
+  }
+
+  .toast-close {
+    background: transparent;
+    border: none;
+    color: var(--muted);
+    font-size: 1.35rem;
+    line-height: 1;
+    padding: 0 4px;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  .toast-close:hover {
+    color: var(--text);
+  }
+
+  @keyframes toastIn {
+    to {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+  }
+
+  /* Respect reduced motion: no animation, just show. */
+  @media (prefers-reduced-motion: reduce) {
+    .toast {
+      animation: none;
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
   }
 </style>
