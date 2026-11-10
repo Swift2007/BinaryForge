@@ -103,31 +103,58 @@ import { hero } from '../data/content';
   @media (max-width: 768px) {
     .hero {
       min-height: calc(100svh + 12px);
-      padding: 148px 0 112px;
+      padding: 132px 0 88px;
+      align-items: flex-end;
     }
     .hero-inner {
-      gap: 24px;
+      gap: 20px;
+    }
+    .hero-title {
+      max-width: 11ch;
+    }
+    .hero-lede {
+      max-width: 34rem;
     }
     .hero-actions {
-      gap: 16px 24px;
+      width: 100%;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 12px;
+    }
+    .hero-actions :global(.btn) {
+      width: 100%;
+    }
+    .hero-actions .link-arrow {
+      justify-content: center;
+      width: 100%;
+      min-height: 44px;
     }
     /* Mobile: apply the hero splash treatment with a stronger, more even
        wash so text remains readable over the photo at any crop. */
     .hero-bg::after {
       background: linear-gradient(
         180deg,
-        rgb(246 247 249 / 0.84) 0%,
-        rgb(246 247 249 / 0.64) 38%,
-        rgb(246 247 249 / 0.38) 72%,
-        rgb(246 247 249 / 0.22) 100%
+        rgb(246 247 249 / 0.88) 0%,
+        rgb(246 247 249 / 0.72) 34%,
+        rgb(246 247 249 / 0.46) 68%,
+        rgb(246 247 249 / 0.24) 100%
       );
       background: linear-gradient(
         180deg,
-        color-mix(in srgb, var(--bg) 84%, transparent) 0%,
-        color-mix(in srgb, var(--bg) 64%, transparent) 38%,
-        color-mix(in srgb, var(--bg) 38%, transparent) 72%,
-        color-mix(in srgb, var(--bg) 22%, transparent) 100%
+        color-mix(in srgb, var(--bg) 88%, transparent) 0%,
+        color-mix(in srgb, var(--bg) 72%, transparent) 34%,
+        color-mix(in srgb, var(--bg) 46%, transparent) 68%,
+        color-mix(in srgb, var(--bg) 24%, transparent) 100%
       );
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero {
+      padding: 124px 0 72px;
+    }
+    .hero-title {
+      max-width: 10ch;
     }
   }
 </style>

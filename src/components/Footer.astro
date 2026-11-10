@@ -201,20 +201,23 @@ import whatsappLogo from '../assets/icons/whatsapp.svg?raw';
   .footer-card :where(a):focus-visible {
     outline-color: var(--on-dark);
   }
-  /* Giant wordmark cropped by the card edge, fading as it goes.
-     The mask was removed because mask-image forces recompositing on
-     every paint during scroll, causing jank on long pages. */
+  /* Giant wordmark cropped by the card edge. Kept explicitly centered
+     across breakpoints, including mobile. */
   .footer-wordmark {
     margin-top: 40px;
     padding-bottom: 40px;
     user-select: none;
     display: flex;
     justify-content: center;
+    align-items: center;
+    width: 100%;
   }
   .wordmark {
+    display: block;
     width: min(100%, 600px);
+    max-width: 100%;
     height: auto;
-    margin-bottom: 0;
+    margin: 0 auto;
     will-change: transform;
   }
   @media (max-width: 1024px) {
@@ -263,6 +266,15 @@ import whatsappLogo from '../assets/icons/whatsapp.svg?raw';
       grid-column: 1 / -1;
       justify-items: center;
       text-align: center;
+    }
+    .footer-wordmark {
+      margin-top: 32px;
+      padding-bottom: 32px;
+      padding-inline: 0;
+    }
+    .wordmark {
+      width: min(100%, 520px);
+      margin-inline: auto;
     }
     .contact-link {
       gap: 10px;
