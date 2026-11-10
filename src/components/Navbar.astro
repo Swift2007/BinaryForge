@@ -272,16 +272,19 @@ import { site } from '../data/site';
     .navbar {
       padding-inline: 16px;
     }
+    /* Switch to flex on mobile so brand sits left and menu sits right. */
+    .navbar-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
     .links,
     .btn-nav {
       display: none;
     }
     .menu {
       display: block;
-    }
-    /* Push the menu button to the very right edge of the nav bar. */
-    .actions {
-      justify-self: end;
     }
   }
 

@@ -81,26 +81,14 @@ import { hero } from '../data/content';
     );
   }
   @media (max-width: 768px) {
-    /* Portrait crop: the photo's top half is pale concrete that reads
-       as blank under a wash, so the frame shifts down to the skylight
-       and the wash runs top to bottom instead: solid enough behind the
-       headline, nearly bare at the bottom so the teal reads. */
-    .hero-bg img {
-      object-position: 50% 78%;
+    /* Mobile keeps the same hero photo crop and gradient wash as desktop
+       so the splash effect is identical across devices. Only padding and
+       action spacing tighten for the smaller screen. */
+    .hero {
+      padding: 156px 0 120px;
     }
-    .hero-bg::after {
-      background: linear-gradient(
-        180deg,
-        rgb(246 247 249 / 0.6) 0%,
-        rgb(246 247 249 / 0.3) 55%,
-        rgb(246 247 249 / 0.1) 100%
-      );
-      background: linear-gradient(
-        180deg,
-        color-mix(in srgb, var(--bg) 60%, transparent) 0%,
-        color-mix(in srgb, var(--bg) 30%, transparent) 55%,
-        color-mix(in srgb, var(--bg) 10%, transparent) 100%
-      );
+    .hero-actions {
+      gap: 16px 24px;
     }
   }
   .hero-inner {
