@@ -264,14 +264,20 @@ import whatsappLogo from '../assets/icons/whatsapp.svg?raw';
       gap: 28px 20px;
       align-items: start;
     }
-    /* Top footer logo aligned to the right on mobile. */
+    /* Keep footer content consistently aligned on mobile. */
     .footer-brand {
       grid-column: 1 / -1;
-      justify-items: end;
-      text-align: right;
+      justify-items: start;
+      text-align: left;
+      gap: 12px;
+    }
+    .footer-brand a {
+      justify-self: start;
+      display: inline-flex;
     }
     .footer-brand p {
-      max-width: 32ch;
+      max-width: 34ch;
+      margin-inline: 0;
     }
     .footer-col {
       justify-items: start;
