@@ -49,6 +49,21 @@ const {
     <!-- Inter is self-hosted and bundled from @fontsource at build time
          (see src/styles/base.css), so no render-blocking font requests. -->
 
+    <!-- Fresh loads (refresh, new visit) start at the top; links with
+         a #anchor still scroll to their target. The browser otherwise
+         silently restores the last scroll position on reload, which
+         looks like the page "forgot" how to go back to the top. -->
+    <script is:inline>
+      if (!location.hash) {
+        if ('scrollRestoration' in history) {
+          history.scrollRestoration = 'manual';
+        }
+        window.addEventListener('pageshow', function () {
+          window.scrollTo(0, 0);
+        });
+      }
+    </script>
+
     <!-- Single light theme: no script needed, nothing to flash. -->
   </head>
   <body id="top">
