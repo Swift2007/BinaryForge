@@ -151,7 +151,7 @@ import whatsappLogo from '../assets/icons/whatsapp.svg?raw';
   .footer-col a {
     color: var(--on-dark-muted);
     text-decoration: none;
-    transition: color 200ms ease-out;
+    transition: color var(--dur-base, 220ms) var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1));
   }
   .footer-col a:hover {
     color: var(--on-dark);
@@ -189,7 +189,7 @@ import whatsappLogo from '../assets/icons/whatsapp.svg?raw';
   .footer-legal a {
     color: var(--on-dark-muted);
     text-decoration: none;
-    transition: color 200ms ease-out;
+    transition: color var(--dur-base, 220ms) var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1));
   }
   .footer-legal a:hover {
     color: var(--on-dark);
@@ -257,6 +257,12 @@ import whatsappLogo from '../assets/icons/whatsapp.svg?raw';
     }
     .footer-top {
       grid-template-columns: 1fr 1fr;
+    }
+    /* Center the brand (logo + note) across both columns on mobile. */
+    .footer-brand {
+      grid-column: 1 / -1;
+      justify-items: center;
+      text-align: center;
     }
     .contact-link {
       gap: 10px;

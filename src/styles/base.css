@@ -134,10 +134,11 @@ h3 {
   cursor: pointer;
   border: 1px solid transparent;
   transition:
-    background-color 200ms ease-out,
-    color 200ms ease-out,
-    border-color 200ms ease-out,
-    transform 100ms ease-out;
+    background-color var(--dur-base, 220ms) var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1)),
+    color var(--dur-base, 220ms) var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1)),
+    border-color var(--dur-base, 220ms) var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1)),
+    transform var(--dur-fast, 150ms) var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1)),
+    box-shadow var(--dur-base, 220ms) var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1));
 }
 /* Press feedback at once (pointer-down), not on release. */
 .btn:active {
@@ -164,7 +165,7 @@ h3 {
   text-decoration: none;
 }
 .link-arrow .arrow {
-  transition: transform 200ms ease-out;
+  transition: transform var(--dur-base, 220ms) var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1));
 }
 .link-arrow:hover .arrow {
   transform: translateX(4px);
@@ -183,7 +184,7 @@ a {
   text-decoration: underline;
   text-decoration-color: var(--border);
   text-underline-offset: 3px;
-  transition: text-decoration-color 200ms ease-out;
+  transition: text-decoration-color var(--dur-base, 220ms) var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1));
 }
 .prose-link:hover {
   text-decoration-color: var(--accent);

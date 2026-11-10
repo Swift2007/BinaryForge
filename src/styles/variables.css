@@ -55,4 +55,13 @@
   --on-dark: #ffffff;
   --on-dark-muted: #b3cfe5;
   --card-line: rgb(179 207 229 / 0.25);
+
+  /* Motion: consistent, restrained timing for UI and page transitions. */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --dur-fast: 150ms;
+  --dur-base: 220ms;
+  --dur-slow: 360ms;
+  --dur-enter: 700ms;
 }

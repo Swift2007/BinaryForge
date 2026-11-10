@@ -28,16 +28,22 @@ import { site } from '../data/site';
         Start a project
       </a>
 
-      <!-- Mobile menu: <details> gives open/close + keyboard + no-JS free. -->
-      <details class="menu">
-        <summary class="menu-button" aria-label="Open menu">
+      <!-- Mobile menu: animated disclosure with reliable close-on-select. -->
+      <div class="menu" data-menu-root>
+        <button
+          class="menu-button"
+          type="button"
+          aria-label="Open menu"
+          aria-expanded="false"
+          aria-controls="mobile-menu-panel"
+        >
           <span class="menu-icon" aria-hidden="true">
             <span></span>
             <span></span>
           </span>
           <span class="sr-only">Menu</span>
-        </summary>
-        <div class="menu-panel">
+        </button>
+        <div class="menu-panel" id="mobile-menu-panel" hidden>
           <nav aria-label="Mobile">
             {
               site.nav.map((item) => (
@@ -46,15 +52,125 @@ import { site } from '../data/site';
                 </a>
               ))
             }
-            <a class="btn btn-dark" href="/#contact">
+            <a class="btn btn-dark menu-cta" href="/#contact">
               Start a project
             </a>
           </nav>
         </div>
-      </details>
+      </div>
     </div>
   </div>
 </header>
+
+<script>
+  /* Mobile menu: accessible, animated disclosure with reliable close behavior. */
+  (() => {
+    const root = document.querySelector('[data-menu-root]');
+    if (!(root instanceof HTMLElement)) return;
+
+    const button = root.querySelector('.menu-button');
+    const panel = root.querySelector('.menu-panel');
+    const links = root.querySelectorAll('a');
+
+    if (!(button instanceof HTMLButtonElement) || !(panel instanceof HTMLElement)) return;
+
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    let isOpen = false;
+    let closeTimer: number | undefined;
+
+    const clearCloseTimer = () => {
+      if (closeTimer !== undefined) {
+        window.clearTimeout(closeTimer);
+        closeTimer = undefined;
+      }
+    };
+
+    const finishClose = () => {
+      panel.hidden = true;
+      panel.classList.remove('is-closing');
+    };
+
+    const setOpenState = (open: boolean) => {
+      isOpen = open;
+      root.classList.toggle('is-open', open);
+      button.setAttribute('aria-expanded', open ? 'true' : 'false');
+      button.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    };
+
+    const openMenu = () => {
+      clearCloseTimer();
+      panel.hidden = false;
+      panel.classList.remove('is-closing');
+
+      // Ensure the opening transition can run from the closed state.
+      requestAnimationFrame(() => {
+        setOpenState(true);
+      });
+    };
+
+    const closeMenu = (options?: { restoreFocus?: boolean }) => {
+      if (!isOpen && panel.hidden) return;
+
+      clearCloseTimer();
+      setOpenState(false);
+
+      if (reduceMotion.matches) {
+        finishClose();
+      } else {
+        panel.classList.add('is-closing');
+        closeTimer = window.setTimeout(finishClose, 220);
+      }
+
+      if (options?.restoreFocus) {
+        button.focus();
+      }
+    };
+
+    button.addEventListener('click', () => {
+      if (isOpen) closeMenu();
+      else openMenu();
+    });
+
+    links.forEach((link) => {
+      link.addEventListener('click', () => {
+        // Close immediately so the menu never blocks content after selection.
+        closeMenu();
+      });
+    });
+
+    document.addEventListener('click', (event) => {
+      if (!isOpen) return;
+      const target = event.target;
+      if (target instanceof Node && !root.contains(target)) {
+        closeMenu();
+      }
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && isOpen) {
+        event.preventDefault();
+        closeMenu({ restoreFocus: true });
+      }
+    });
+
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 860 && isOpen) {
+        clearCloseTimer();
+        setOpenState(false);
+        finishClose();
+      }
+    });
+
+    // If the page is restored from bfcache, ensure the menu is not left open.
+    window.addEventListener('pageshow', () => {
+      if (isOpen) {
+        clearCloseTimer();
+        setOpenState(false);
+        finishClose();
+      }
+    });
+  })();
+</script>
 
 <style>
   /* Floating glass pill: sticky with a 12px offset, page scrolls
@@ -136,7 +252,7 @@ import { site } from '../data/site';
     font-weight: 400;
     text-decoration: none;
     padding-block: 8px;
-    transition: color 200ms ease-out;
+    transition: color var(--dur-base, 220ms) var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1));
   }
   .nav-link:hover {
     color: var(--text);
@@ -149,7 +265,7 @@ import { site } from '../data/site';
     bottom: 2px;
     height: 1px;
     background: var(--accent);
-    transition: right 200ms ease-out;
+    transition: right var(--dur-base, 220ms) var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1));
   }
   .nav-link:hover::after {
     right: 0;
@@ -174,7 +290,7 @@ import { site } from '../data/site';
     font-size: 0.9375rem;
   }
 
-  /* Mobile menu (details/popover-free, pure HTML+CSS). */
+  /* Mobile menu: animated, accessible disclosure. */
   .menu {
     display: none;
     position: relative;
@@ -184,18 +300,29 @@ import { site } from '../data/site';
     align-items: center;
     justify-content: center;
     width: 44px;
-    height: 44px; /* 44px: the minimum comfortable tap target */
+    height: 44px; /* 44px: comfortable tap target */
+    padding: 0;
     border: 1px solid var(--border);
     border-radius: 9999px;
+    background: transparent;
     cursor: pointer;
-    list-style: none;
     color: var(--text);
-  }
-  .menu-button::-webkit-details-marker {
-    display: none;
+    transition:
+      border-color var(--dur-base, 220ms) var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1)),
+      background-color var(--dur-base, 220ms) var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1)),
+      color var(--dur-base, 220ms) var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1)),
+      transform var(--dur-fast, 150ms) var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1));
   }
   .menu-button:hover {
     border-color: var(--muted);
+    background: rgb(255 255 255 / 0.24);
+  }
+  .menu-button:active {
+    transform: scale(0.97);
+  }
+  .menu.is-open .menu-button {
+    border-color: var(--muted);
+    background: rgb(255 255 255 / 0.3);
   }
   .menu-icon {
     display: grid;
@@ -205,63 +332,84 @@ import { site } from '../data/site';
     display: block;
     width: 18px;
     height: 1.5px;
+    border-radius: 999px;
     background: currentColor;
-    transition: transform 200ms ease-out;
+    transform-origin: center;
+    transition: transform var(--dur-base, 220ms) var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1));
   }
-  .menu[open] .menu-icon span:first-child {
+  .menu.is-open .menu-icon span:first-child {
     transform: translateY(3.75px) rotate(45deg);
   }
-  .menu[open] .menu-icon span:last-child {
+  .menu.is-open .menu-icon span:last-child {
     transform: translateY(-3.75px) rotate(-45deg);
   }
   .menu-panel {
     position: absolute;
     right: 0;
     top: calc(100% + 12px);
-    min-width: 240px;
-    padding: 16px;
-    /* Same glass as the bar: tint, sheen, hairline, interior glow. */
+    min-width: min(280px, calc(100vw - 32px));
+    padding: 12px;
+    /* Same glass language as the navbar bar. */
     background:
       linear-gradient(
         160deg,
-        rgb(255 255 255 / 0.35),
-        rgb(255 255 255 / 0.08)
+        rgb(255 255 255 / 0.38),
+        rgb(255 255 255 / 0.1)
       ),
       var(--nav-bg);
-    border: 1px solid rgb(255 255 255 / 0.6);
-    border-radius: 12px;
+    border: 1px solid rgb(255 255 255 / 0.62);
+    border-radius: 16px;
     box-shadow:
       inset 0 1px 0 rgb(255 255 255 / 0.5),
       inset 0 0 16px rgb(255 255 255 / 0.1),
-      0 12px 40px var(--bar-shadow);
+      0 16px 48px rgb(10 25 49 / 0.14);
     -webkit-backdrop-filter: blur(28px) saturate(200%);
     backdrop-filter: blur(28px) saturate(200%);
-    /* Enters from the button that triggered it: fade and a 4px drop
-       toward the page. Closing snaps: <details> unrenders content and
-       CSS has no reverse hook here without restructuring the layout. */
     opacity: 0;
-    transform: translateY(-4px);
+    transform: translateY(-8px) scale(0.985);
+    transform-origin: top right;
+    visibility: hidden;
+    pointer-events: none;
     transition:
-      opacity 150ms ease-out,
-      transform 150ms ease-out;
+      opacity var(--dur-base, 220ms) var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1)),
+      transform var(--dur-base, 220ms) var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1)),
+      visibility 0s linear var(--dur-base, 220ms);
+    will-change: opacity, transform;
   }
-  .menu[open] .menu-panel {
+  .menu-panel[hidden] {
+    display: none;
+  }
+  .menu.is-open .menu-panel {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
+    visibility: visible;
+    pointer-events: auto;
+    transition-delay: 0s;
   }
   .menu-panel nav {
     display: grid;
     gap: 4px;
   }
   .menu-link {
-    padding: 12px;
-    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 10px 12px;
+    border-radius: 10px;
     color: var(--text);
     text-decoration: none;
     font-size: 1rem;
+    line-height: 1.4;
+    transition:
+      background-color var(--dur-fast, 150ms) var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1)),
+      color var(--dur-fast, 150ms) var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1)),
+      transform var(--dur-fast, 150ms) var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1));
   }
   .menu-link:hover {
-    background: var(--bg-alt);
+    background: rgb(255 255 255 / 0.45);
+  }
+  .menu-link:active {
+    transform: scale(0.99);
   }
   .menu-panel .btn {
     margin-top: 8px;

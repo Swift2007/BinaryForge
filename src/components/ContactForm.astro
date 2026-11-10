@@ -192,8 +192,8 @@ const f = contact.form;
     background: var(--input-bg);
     border: 1px solid var(--border-strong);
     transition:
-      border-color 150ms ease-out,
-      box-shadow 150ms ease-out;
+      border-color var(--dur-fast, 150ms) var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1)),
+      box-shadow var(--dur-fast, 150ms) var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1));
   }
   /* 8px radius and 52px height match the button system, so fields and
      the submit button read as one set of parts instead of a mix. */
@@ -256,9 +256,9 @@ const f = contact.form;
     position: fixed;
     top: 120px;
     left: 50%;
-    transform: translate(-50%, -120px);
+    transform: translate(-50%, -24px);
     opacity: 0;
-    animation: toastIn 400ms ease-out forwards;
+    animation: toastIn 420ms var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1)) forwards;
     display: flex;
     align-items: center;
     gap: 12px;
@@ -374,12 +374,12 @@ const f = contact.form;
     const dismissToast = () => {
       if (!toast) return;
       toast.style.opacity = '0';
-      toast.style.transform = 'translate(-50%, -120px)';
+      toast.style.transform = 'translate(-50%, -24px)';
       setTimeout(() => {
         toast.hidden = true;
         toast.style.opacity = '';
         toast.style.transform = '';
-      }, 300);
+      }, 240);
     };
 
     const showToast = () => {

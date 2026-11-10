@@ -1,23 +1,19 @@
-/* HAUTEK motion: restrained and site-wide, one vocabulary.
-   1. Arrival: the hero photo settles and the headline rises on load.
-      The navbar is deliberately instant: chrome is the frame, not a
-      moving part. Nothing loops.
-   2. Page changes cross-fade; the shared navbar is named so the frame
-      stays put while the content changes.
-   3. Content blocks (sections, footer) settle in as they enter the
-      viewport, only where the browser supports CSS scroll-driven
-      animations (Chromium, Safari 26+; Firefox shows static content).
-      One simple animation range, no exotic timing combinations.
-   4. Everything honors prefers-reduced-motion. Interactive elements
-      use short transitions defined alongside their components. */
+/* HAUTEK motion: restrained, cohesive, and site-wide.
+   1. Arrival: the hero image settles and content rises in sequence on load.
+      Chrome stays stable; the hero is the one deliberate entrance.
+   2. Page changes cross-fade while the shared navbar persists.
+   3. Sections and the footer settle in as they enter the viewport where
+      scroll-driven animations are supported. This is progressive
+      enhancement; unsupported browsers show static content.
+   4. Motion honors prefers-reduced-motion. Interactive elements keep
+      short, purposeful transitions defined near their components. */
 
 /* Entrance keyframes: opacity and transform only (compositor-friendly),
-   plain ease-out, no overshoot. rise-in-sm doubles as the section
-   settle: one motion vocabulary across the site. */
+   with smooth deceleration and no overshoot. */
 @keyframes hero-photo-in {
   from {
     opacity: 0;
-    transform: scale(1.03);
+    transform: scale(1.035);
   }
   to {
     opacity: 1;
@@ -27,7 +23,7 @@
 @keyframes rise-in {
   from {
     opacity: 0;
-    transform: translateY(16px);
+    transform: translateY(18px);
   }
   to {
     opacity: 1;
@@ -45,25 +41,25 @@
   }
 }
 
-/* The one deliberate moment: the hero arrives, the rest of the page
-   stays still until scrolled into. Elements start 80ms apart so they
-   read in order, and fill-mode "both" holds their start state during
-   the delays. */
+/* Hero arrival: a calm, staged sequence with consistent easing. */
 .hero-bg img {
-  animation: hero-photo-in 1200ms ease-out both;
+  animation: hero-photo-in 1100ms var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1))
+    both;
 }
 .hero-title {
-  animation: rise-in 500ms ease-out 80ms both;
+  animation: rise-in 640ms var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1)) 120ms
+    both;
 }
 .hero-lede {
-  animation: rise-in-sm 500ms ease-out 160ms both;
+  animation: rise-in-sm 620ms var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1))
+    220ms both;
 }
 .hero-actions {
-  animation: rise-in-sm 500ms ease-out 240ms both;
+  animation: rise-in-sm 620ms var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1))
+    320ms both;
 }
 
-/* Page-to-page: the default cross-fade, no slide, no scale. One
-   navigation opt-in, no custom keyframes. */
+/* Page-to-page: subtle cross-fade, no dramatic movement. */
 @view-transition {
   navigation: auto;
 }
@@ -71,17 +67,39 @@
   view-transition-name: navbar;
 }
 
-/* Content settle-in: progress follows the scroll position itself, so
-   the 12px rise completes while the block enters the viewport and
-   reverses symmetrically on scroll-back. Sections and the footer use
-   it; blocks already in view on load show completed (fill both). */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 240ms;
+  animation-timing-function: var(--ease-in-out, cubic-bezier(0.4, 0, 0.2, 1));
+}
+
+/* Content settle-in: a gentle reveal as content enters the viewport. */
 @media (prefers-reduced-motion: no-preference) {
   @supports (animation-timeline: view()) {
     .section,
     .footer {
       animation: rise-in-sm linear both;
       animation-timeline: view();
-      animation-range: entry 0% entry 40%;
+      animation-range: entry 0% entry 28%;
     }
+  }
+}
+
+/* Mobile tuning: slightly shorter, tighter motion for smaller screens. */
+@media (max-width: 768px) {
+  .hero-bg img {
+    animation-duration: 900ms;
+  }
+  .hero-title {
+    animation-duration: 560ms;
+    animation-delay: 80ms;
+  }
+  .hero-lede {
+    animation-duration: 540ms;
+    animation-delay: 150ms;
+  }
+  .hero-actions {
+    animation-duration: 540ms;
+    animation-delay: 220ms;
   }
 }

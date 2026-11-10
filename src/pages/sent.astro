@@ -42,8 +42,8 @@ const { successTitle, successText } = contact.form;
   const dismiss = () => {
     if (!toast) return;
     toast.style.opacity = '0';
-    toast.style.transform = 'translate(-50%, -120px)';
-    setTimeout(() => toast.remove(), 300);
+    toast.style.transform = 'translate(-50%, -24px)';
+    setTimeout(() => toast.remove(), 240);
   };
   if (toast) {
     setTimeout(dismiss, 8000);
@@ -67,9 +67,9 @@ const { successTitle, successText } = contact.form;
     position: fixed;
     top: 120px;
     left: 50%;
-    transform: translate(-50%, -120px);
+    transform: translate(-50%, -24px);
     opacity: 0;
-    animation: toastIn 400ms ease-out forwards;
+    animation: toastIn 420ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
     display: flex;
     align-items: center;
     gap: 12px;
