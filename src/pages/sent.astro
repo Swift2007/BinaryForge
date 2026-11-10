@@ -36,16 +36,16 @@ const { successTitle, successText } = contact.form;
 </BaseLayout>
 
 <script>
-  /* Auto-dismiss the pop notification after 6 seconds. */
+  /* Auto-dismiss the pop notification after 8 seconds. */
   const toast = document.querySelector('.toast');
   const dismiss = () => {
     if (!toast) return;
     toast.style.opacity = '0';
-    toast.style.transform = 'translate(-50%, -24px)';
+    toast.style.transform = 'translate(-50%, -120px)';
     setTimeout(() => toast.remove(), 300);
   };
   if (toast) {
-    setTimeout(dismiss, 6000);
+    setTimeout(dismiss, 8000);
     const close = toast.querySelector('.toast-close');
     if (close) {
       close.addEventListener('click', dismiss);
@@ -60,30 +60,31 @@ const { successTitle, successText } = contact.form;
     max-width: 40ch;
   }
 
-  /* Pop notification: fixed, top-centre, slides down into view. */
+  /* Pop notification: fixed, top-centre, slides down into view.
+      Placed below the sticky navbar so nothing covers it. */
   .toast {
     position: fixed;
-    top: 24px;
+    top: 120px;
     left: 50%;
-    transform: translate(-50%, -24px);
+    transform: translate(-50%, -120px);
     opacity: 0;
     animation: toastIn 400ms ease-out forwards;
     display: flex;
     align-items: center;
     gap: 12px;
-    padding: 16px 20px;
+    padding: 18px 24px;
     background: var(--surface);
     border: 1px solid var(--border-strong);
-    border-left: 4px solid var(--accent);
-    border-radius: 12px;
-    box-shadow: 0 10px 25px -5px rgb(10 25 49 / 0.08),
-      0 8px 10px -6px rgb(10 25 49 / 0.03);
+    border-left: 6px solid var(--accent);
+    border-radius: 14px;
+    box-shadow: 0 20px 40px -10px rgb(10 25 49 / 0.12),
+      0 8px 12px -4px rgb(10 25 49 / 0.06);
     color: var(--text);
-    font-size: 0.95rem;
+    font-size: 1rem;
     line-height: 1.5;
-    z-index: 100;
+    z-index: 9999;
     max-width: 92vw;
-    width: 420px;
+    width: 440px;
   }
 
   .toast-icon {

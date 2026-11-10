@@ -42,5 +42,5 @@ export const site = {
   // TODO(owner): replace with the real public URL of this site. The
   // contact form builds its post-submit redirect from this value, so
   // it must be set before deploying.
-  canonical: 'https://hautek.example.com/',
+  canonical: 'https://hautek.org/',
 };
