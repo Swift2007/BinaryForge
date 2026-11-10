@@ -12,10 +12,12 @@ import '../styles/animations.css';
 interface Props {
   title?: string;
   description?: string;
+  noindex?: boolean;
 }
 const {
   title = 'HAUTEK | Software built to last',
   description = 'HAUTEK is a small software startup in Malawi building mobile apps, websites, web applications and custom software. Software built to last.',
+  noindex = false,
 } = Astro.props;
 ---
 
@@ -26,6 +28,7 @@ const {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex" />}
     <link rel="canonical" href={site.canonical} />
 
     <!-- Open Graph -->

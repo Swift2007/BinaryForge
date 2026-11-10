@@ -18,6 +18,7 @@ const f = contact.form;
 
 <form
   class="form"
+  id="contact-form"
   action={isReady ? site.formEndpoint : `mailto:${site.email}`}
   enctype={isReady ? undefined : 'text/plain'}
   method="POST"
@@ -114,10 +115,45 @@ const f = contact.form;
         <input type="checkbox" name="consent" required />
         <span>{f.consent}</span>
       </label>
-      <button class="btn btn-primary form-submit" type="submit">
+      <button class="btn btn-primary form-submit" type="submit" id="form-submit-btn">
         {f.submit}
       </button>
     </form>
+
+    {isReady && (
+      <>
+        <!-- Inline toast shown after successful AJAX submit -->
+        <div
+          id="form-toast"
+          class="form-toast"
+          role="status"
+          aria-live="polite"
+          tabindex="-1"
+          hidden
+        >
+          <div class="toast-icon" aria-hidden="true">✓</div>
+          <div class="toast-body">
+            <h3 class="toast-title">{f.successTitle}</h3>
+            <p class="toast-message">{f.successText}</p>
+          </div>
+          <button class="toast-close" aria-label="Dismiss notification">×</button>
+        </div>
+
+        <!-- Error message shown on submission failure -->
+        <div
+          id="form-error"
+          class="form-error"
+          role="alert"
+          aria-live="assertive"
+          hidden
+        >
+          <p>
+            Something went wrong. Please email us directly at{' '}
+            <a class="prose-link" href={`mailto:${site.email}`}>{site.email}</a>.
+          </p>
+        </div>
+      </>
+    )}
 {
   /* Visible until the owner pastes the Web3Forms key in site.ts. */
   !isReady && (
@@ -209,16 +245,188 @@ const f = contact.form;
   .form-submit {
     width: 100%;
     margin-top: 8px;
+    position: relative;
   }
-  /* Shown until the owner adds a form endpoint in site.ts. */
-  .form-note {
-    margin-top: 16px;
-    font-size: 0.9375rem;
+  .form-submit:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+  /* Inline toast shown after successful AJAX submit */
+  .form-toast {
+    position: fixed;
+    top: 120px;
+    left: 50%;
+    transform: translate(-50%, -120px);
+    opacity: 0;
+    animation: toastIn 400ms ease-out forwards;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 18px 24px;
+    background: var(--surface);
+    border: 1px solid var(--border-strong);
+    border-left: 6px solid var(--accent);
+    border-radius: 14px;
+    box-shadow: 0 20px 40px -10px rgb(10 25 49 / 0.12),
+      0 8px 12px -4px rgb(10 25 49 / 0.06);
+    color: var(--text);
+    font-size: 1rem;
+    line-height: 1.5;
+    z-index: 9999;
+    max-width: 92vw;
+    width: 440px;
+  }
+  .toast-icon {
+    width: 26px;
+    height: 26px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: var(--accent);
+    color: var(--accent-ink);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.1rem;
+    line-height: 1;
+  }
+  .toast-body {
+    flex: 1;
+    min-width: 0;
+  }
+  .toast-title {
+    margin: 0 0 4px 0;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text);
+  }
+  .toast-message {
+    margin: 0;
+    font-size: 0.9rem;
     color: var(--muted);
   }
+  .toast-close {
+    background: transparent;
+    border: none;
+    color: var(--muted);
+    font-size: 1.35rem;
+    line-height: 1;
+    padding: 0 4px;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+  .toast-close:hover {
+    color: var(--text);
+  }
+  /* Error message */
+  .form-error {
+    margin-top: 12px;
+    padding: 14px 18px;
+    background: rgb(139 36 36 / 0.08);
+    border: 1px solid rgb(139 36 36 / 0.3);
+    border-left: 4px solid #8b2424;
+    border-radius: 8px;
+    color: #8b2424;
+    font-size: 0.9375rem;
+    line-height: 1.5;
+  }
+  .form-error a {
+    color: #8b2424;
+    text-decoration: underline;
+    font-weight: 600;
+  }
+  @keyframes toastIn {
+    to {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .form-toast {
+      animation: none;
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+  }
   @media (max-width: 640px) {
-    .form {
-      grid-template-columns: 1fr;
+    .form-toast {
+      top: 100px;
+      width: 90vw;
     }
   }
 </style>
+
+<script>
+  /* AJAX form submission: POST to Web3Forms without full-page redirect,
+     show an inline toast on success or an error message on failure. */
+  (function () {
+    const form = document.getElementById('contact-form');
+    const submitBtn = document.getElementById('form-submit-btn');
+    const toast = document.getElementById('form-toast');
+    const error = document.getElementById('form-error');
+
+    if (!form || !submitBtn || !toast || !error) return;
+
+    const dismissToast = () => {
+      if (!toast) return;
+      toast.style.opacity = '0';
+      toast.style.transform = 'translate(-50%, -120px)';
+      setTimeout(() => {
+        toast.hidden = true;
+        toast.style.opacity = '';
+        toast.style.transform = '';
+      }, 300);
+    };
+
+    const showToast = () => {
+      error.hidden = true;
+      toast.hidden = false;
+      toast.style.opacity = '1';
+      toast.style.transform = 'translate(-50%, 0)';
+      toast.focus();
+      setTimeout(dismissToast, 8000);
+    };
+
+    const showError = () => {
+      toast.hidden = true;
+      error.hidden = false;
+    };
+
+    const closeToast = toast.querySelector('.toast-close');
+    if (closeToast) {
+      closeToast.addEventListener('click', dismissToast);
+    }
+
+    toast.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') dismissToast();
+    });
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending…';
+
+      const formData = new FormData(form);
+
+      try {
+        const response = await fetch(form.action, {
+          method: 'POST',
+          body: formData,
+          headers: { Accept: 'application/json' },
+        });
+
+        if (response.ok) {
+          form.reset();
+          showToast();
+        } else {
+          showError();
+        }
+      } catch {
+        showError();
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Send message';
+      }
+    });
+  })();
+</script>
