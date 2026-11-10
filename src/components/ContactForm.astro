@@ -276,6 +276,10 @@ const f = contact.form;
     max-width: 92vw;
     width: 440px;
   }
+  /* Explicitly hide when the [hidden] attribute is present */
+  .form-toast[hidden] {
+    display: none !important;
+  }
   .toast-icon {
     width: 26px;
     height: 26px;
@@ -381,6 +385,8 @@ const f = contact.form;
     const showToast = () => {
       error.hidden = true;
       toast.hidden = false;
+      // Force reflow so the animation/restyle applies cleanly
+      void toast.offsetHeight;
       toast.style.opacity = '1';
       toast.style.transform = 'translate(-50%, 0)';
       toast.focus();
