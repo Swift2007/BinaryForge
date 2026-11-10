@@ -338,13 +338,17 @@ import { site } from '../data/site';
     height: 1.5px;
     border-radius: 999px;
     background: currentColor;
+    -webkit-transform-origin: center;
     transform-origin: center;
     transition: transform var(--dur-base, 220ms) var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1));
+    -webkit-transition: -webkit-transform var(--dur-base, 220ms) var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1));
   }
   .menu.is-open .menu-icon span:first-child {
+    -webkit-transform: translateY(3.75px) rotate(45deg);
     transform: translateY(3.75px) rotate(45deg);
   }
   .menu.is-open .menu-icon span:last-child {
+    -webkit-transform: translateY(-3.75px) rotate(-45deg);
     transform: translateY(-3.75px) rotate(-45deg);
   }
   .menu-panel {
@@ -361,13 +365,19 @@ import { site } from '../data/site';
       0 18px 48px rgb(10 25 49 / 0.14),
       0 2px 8px rgb(10 25 49 / 0.06);
     opacity: 0;
+    -webkit-transform: translateY(-8px) scale(0.985);
     transform: translateY(-8px) scale(0.985);
+    -webkit-transform-origin: top right;
     transform-origin: top right;
     visibility: hidden;
     pointer-events: none;
     transition:
       opacity var(--dur-base, 220ms) var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1)),
       transform var(--dur-base, 220ms) var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1)),
+      visibility 0s linear var(--dur-base, 220ms);
+    -webkit-transition:
+      opacity var(--dur-base, 220ms) var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1)),
+      -webkit-transform var(--dur-base, 220ms) var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1)),
       visibility 0s linear var(--dur-base, 220ms);
     will-change: opacity, transform;
   }
@@ -376,6 +386,7 @@ import { site } from '../data/site';
   }
   .menu.is-open .menu-panel {
     opacity: 1;
+    -webkit-transform: translateY(0) scale(1);
     transform: translateY(0) scale(1);
     visibility: visible;
     pointer-events: auto;

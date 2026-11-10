@@ -10,6 +10,18 @@
 
 /* Entrance keyframes: opacity and transform only (compositor-friendly),
    with smooth deceleration and no overshoot. */
+@-webkit-keyframes hero-photo-in {
+  from {
+    opacity: 0;
+    -webkit-transform: scale(1.035);
+    transform: scale(1.035);
+  }
+  to {
+    opacity: 1;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+}
 @keyframes hero-photo-in {
   from {
     opacity: 0;
@@ -20,6 +32,18 @@
     transform: scale(1);
   }
 }
+@-webkit-keyframes rise-in {
+  from {
+    opacity: 0;
+    -webkit-transform: translateY(18px);
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+}
 @keyframes rise-in {
   from {
     opacity: 0;
@@ -27,6 +51,18 @@
   }
   to {
     opacity: 1;
+    transform: translateY(0);
+  }
+}
+@-webkit-keyframes rise-in-sm {
+  from {
+    opacity: 0;
+    -webkit-transform: translateY(12px);
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    -webkit-transform: translateY(0);
     transform: translateY(0);
   }
 }
@@ -43,18 +79,26 @@
 
 /* Hero arrival: a calm, staged sequence with consistent easing. */
 .hero-bg img {
+  -webkit-animation: hero-photo-in 1100ms var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1))
+    both;
   animation: hero-photo-in 1100ms var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1))
     both;
 }
 .hero-title {
+  -webkit-animation: rise-in 640ms var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1)) 120ms
+    both;
   animation: rise-in 640ms var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1)) 120ms
     both;
 }
 .hero-lede {
+  -webkit-animation: rise-in-sm 620ms var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1))
+    220ms both;
   animation: rise-in-sm 620ms var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1))
     220ms both;
 }
 .hero-actions {
+  -webkit-animation: rise-in-sm 620ms var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1))
+    320ms both;
   animation: rise-in-sm 620ms var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1))
     320ms both;
 }
