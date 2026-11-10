@@ -440,13 +440,15 @@ import { site } from '../data/site';
     }
     .menu {
       display: block;
+      position: static;
     }
     .menu-panel {
-      right: 0;
-      left: auto;
-      width: min(360px, calc(100vw - 24px));
+      left: 12px;
+      right: 12px;
+      width: auto;
       padding: 12px;
       border-radius: 18px;
+      transform-origin: top center;
     }
     .menu-link {
       min-height: 48px;
