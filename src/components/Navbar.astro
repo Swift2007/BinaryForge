@@ -1,4 +1,4 @@
-<!-- HAUTEK navbar: floating pill bar, wordmark left, links centered,
+<!-- HAUTEK navbar: sticky opaque pill bar, wordmark left, links centered,
      contact button right. OWNER: links come from src/data/site.ts. Mobile
      menu is a <details> element: HTML and CSS only, keyboard accessible,
      no JavaScript. -->
@@ -57,12 +57,8 @@ import { site } from '../data/site';
 </header>
 
 <style>
-  /* Floating glass pill: sticky with a 12px offset, page scrolls
-     beneath it. The glass is built in layers: the --nav-bg tint at
-     the bottom, a diagonal white sheen above it, a white hairline
-     border, inset top and bottom glows that catch the light, and a
-     specular streak lying across the bar like a reflection. Strong
-     blur and saturation melt the photo behind the glass. */
+  /* Sticky opaque pill bar: sits above page content with a 12px offset.
+     Fully opaque (solid surface) so content never shows through. */
   .navbar {
     position: sticky;
     top: 12px;
@@ -80,25 +76,10 @@ import { site } from '../data/site';
     margin-inline: auto;
     padding-inline: 24px;
     background: var(--surface);
+    background-color: #ffffff;
     border: 1px solid var(--border);
     border-radius: 9999px;
     box-shadow: 0 10px 28px rgb(10 25 49 / 0.08);
-  }
-  /* Keep a subtle highlight without making the bar transparent. */
-  .navbar-bar::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    background: linear-gradient(
-      180deg,
-      rgb(255 255 255 / 0.35),
-      transparent 60%
-    );
-    pointer-events: none;
-  }
-  .navbar-bar > * {
-    position: relative;
   }
   .brand {
     display: inline-flex;
@@ -259,40 +240,4 @@ import { site } from '../data/site';
     }
   }
 
-  @supports not (
-    (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))
-  ) {
-    .navbar-bar::before {
-      display: none;
-    }
-  }
 </style>
-
-<script>
-  // Close the mobile menu after selecting an option so it doesn't block content.
-  (function () {
-    var menu = document.querySelector('.navbar .menu');
-    if (!menu || menu.tagName !== 'DETAILS') return;
-
-    var links = menu.querySelectorAll('a[href]');
-    for (var i = 0; i < links.length; i++) {
-      links[i].addEventListener('click', function () {
-        menu.open = false;
-      });
-    }
-
-    document.addEventListener('click', function (event) {
-      if (!menu.open) return;
-      if (menu.contains(event.target)) return;
-      menu.open = false;
-    });
-
-    document.addEventListener('keydown', function (event) {
-      if (event.key === 'Escape' && menu.open) {
-        menu.open = false;
-        var summary = menu.querySelector('summary');
-        if (summary && summary.focus) summary.focus();
-      }
-    });
-  })();
-</script>
